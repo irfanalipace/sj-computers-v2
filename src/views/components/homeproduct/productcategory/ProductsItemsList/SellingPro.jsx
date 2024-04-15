@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SellingProducts from '../../../MobileCategory/SellingProducts/SellingProducts';
 import { getProductsCategory } from '../../../../../core/api/products';
 import { useNavigate } from 'react-router-dom';
+import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
 const SellingPro = ({ images }) => {
   const navigate = useNavigate();
   const [topRatedProduct, setTopRatedProduct] = useState([]);
@@ -13,7 +14,22 @@ const SellingPro = ({ images }) => {
       per_page: 10,
     };
     const res = await getProductsCategory(filterObject);
+    viewItemDataLayer(res?.data?.data);
     setTopRatedProduct(res?.data?.data);
+  };
+  const viewItemDataLayer = (products, categorySlug) => {
+    console.log(
+      'view_item_list data layer top rated',
+      makeDataLayerItemObject(products),
+    );
+    window.dataLayer.push(function () {
+      this.reset();
+    });
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'top-rated',
+      items: makeDataLayerItemObject(products),
+    });
   };
   useEffect(() => {
     setTimeout(() => {

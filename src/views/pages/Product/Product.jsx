@@ -1,4 +1,4 @@
-import { lazy, useEffect } from 'react';
+import { lazy, useEffect, useRef } from 'react';
 import LoaderComponent from '@common/LoaderComponent/LoaderComponent';
 import { ProductImage } from '@components/Product/ProductImage/ProductImage';
 import ProductDetails from '@components/Product/ProductDetails/ProductDetails';
@@ -73,11 +73,13 @@ export default function Product() {
     };
   }, []);
 
+  const pro = useRef(null);
+
   useEffect(() => {
-    if (!product) return;
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    if (!product || pro?.current?.id === product?.id) return;
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     console.log('select_item', makeDataLayerItemObject([{ ...product }]));
     window.dataLayer.push({
       event: 'select_item',
@@ -86,12 +88,16 @@ export default function Product() {
 
     console.log('view-item', makeDataLayerItemObject([{ ...product }]));
     console.log('data layer', window.dataLayer);
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item',
       currency: 'USD',
       value: parseFloat(product?.price),
       items: makeDataLayerItemObject([{ ...product }]),
     });
+    pro.current = product;
   }, [product]);
 
   const getProtectionPlans = async () => {
@@ -156,7 +162,7 @@ export default function Product() {
               )}
               {isUpSmall && (
                 <VisibleOnScroll id='section3'>
-                  <Recommendation />
+                  <Recommendation dataLayer={true} />
                 </VisibleOnScroll>
               )}
             </div>
@@ -199,8 +205,29 @@ const ProductMobileComponent = ({ product, isUpSmall }) => {
 };
 
 const SimilarItemsOfProduct = ({ productId, isMobile }) => {
+  const viewItemDataLayer = (products, categorySlug) => {
+    console.log(
+      'view_item_list data layer',
+      'simoilar',
+
+      makeDataLayerItemObject(products),
+    );
+    window.dataLayer.push(function () {
+      this.reset();
+    });
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'similar_items_of_product',
+      items: makeDataLayerItemObject(products),
+    });
+  };
   const { similarProducts, featuredProducts, isLoading } =
     useSimilarData(productId);
+  useEffect(() => {
+    if (similarProducts.length) {
+      viewItemDataLayer(similarProducts, '');
+    }
+  }, [similarProducts]);
   return (
     <div>
       {isLoading ? (

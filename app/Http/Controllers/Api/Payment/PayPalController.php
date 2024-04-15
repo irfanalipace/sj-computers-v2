@@ -166,9 +166,9 @@ class PayPalController extends Controller
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {           
                 return redirect()->route('cancel');
-            }    
-           
-            $orderData['order_detail'] = $order['order'];
+            }
+
+            $orderData['order_detail'] = $order['order']->toArray();
             $orderData['payer_id'] = $response['id'];
 
             $orderDetailOutput['order_no'] = $order['order']['id'];

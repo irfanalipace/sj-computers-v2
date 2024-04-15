@@ -102,7 +102,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     //   filterObject.name = categorySlug;
     // }
     setLoading(true);
-    console.log(filterObject);
     dispatch(
       filterProducts(filterObject, true, productAfterShowMore => {
         setLoading(false);
@@ -119,14 +118,14 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
   };
 
   const viewItemDataLayer = (products, categorySlug) => {
-    console.print(
+    console.log(
       'view_item_list data layer',
       pathValue,
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: categorySlug,
@@ -178,7 +177,6 @@ const ProductCategoryGrid = ({ pathValue, filters }) => {
     }
 
     if (!isEmpty(filteredData) || isMOunt) {
-      console.log(filterObject);
       dispatch(
         filterProducts(filterObject, false, productAfterShowMore => {
           // setProductsList([...productsList, ...productAfterShowMore]);

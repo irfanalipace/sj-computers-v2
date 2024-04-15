@@ -32,7 +32,6 @@ function Search() {
   const handleItemClick = category => {
     setSelectedItem(category);
     dispatch(SET_SELECTED_CATEGORY(category?.id));
-    // debugger;
     // setSearch(category?.name);
     setDropdownOpen(false);
     // navigate(`/products/search?s=${encodeURIComponent(category.name)}`);

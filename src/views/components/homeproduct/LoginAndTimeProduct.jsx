@@ -118,7 +118,7 @@ const LoginAndTimeProduct = () => {
                         Free Shipping
                       </div>
                       <div className='save-value'>
-                        <span>Save + {discoutedProduct?.is_discount}</span>
+                        <span>Save + {discoutedProduct?.is_discount}%</span>
                       </div>
                     </Stack>
                     {/* <div className='end-in'>
@@ -262,7 +262,7 @@ const LoginAndTimeProduct = () => {
                         Shipping
                       </div>
                       <div className='save-value'>
-                        <span>Save + {discoutedProduct?.is_discount}</span>
+                        <span>Save + {discoutedProduct?.is_discount}%</span>
                       </div>
                       {/* <div className='end-in'>
                           Ends in {parsedDate.getHours()}

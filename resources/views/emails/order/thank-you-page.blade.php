@@ -339,14 +339,6 @@
             direction: ltr;
         }
 
-        .mceText a {
-            color: rgb(0, 0, 0);
-            font-style: normal;
-            font-weight: normal;
-            text-decoration: underline;
-            direction: ltr;
-        }
-
         @media only screen and (max-width: 480px) {
             .mceText p {
                 font-size: 16px !important;
@@ -367,7 +359,6 @@
 
         body {
             font-family: Inter, sans-serif;
-            color: rgb(0, 0, 0);
         }</style>
     <script>!function () {
             function o(n, i) {
@@ -412,31 +403,31 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "m77ugxqxfejyezqorbhq-f-923cdc4ea-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "m77ugxqxfejyezqpsd7a-f-ec13f7eb9-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
-                            "ak.cp": "641075",
-                            "ak.ai": parseInt("441803", 10),
+                            "ak.cp": "1513051",
+                            "ak.ai": parseInt("963350", 10),
                             "ak.ol": "0",
-                            "ak.cr": 108,
+                            "ak.cr": 103,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "51f9f8d7",
+                            "ak.rid": "69bd05e1",
                             "ak.r": 44715,
                             "ak.a2": e,
                             "ak.m": "x",
                             "ak.n": "essl",
                             "ak.bpcip": "103.255.67.0",
-                            "ak.cport": 60068,
+                            "ak.cport": 50090,
                             "ak.gh": "23.44.214.25",
                             "ak.quicv": "",
                             "ak.tlsv": "tls1.3",
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712228431",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==eIuQPEjqyVpz4EpXmlGXQdb7hphN5m04Y6gcMZtQ/pob8JoJUE7+/6qFTBeCRqCba8ADZQ/kU0Swov7a7rid52NkOsVUVUuv2U+OmUraFEOwVbSuVMjzqwSeYmbI7SLPC2ElXu7yFiXPZXtiE8lixmn8zj2GmgMnQCkZpWWR4NVw6erK9Pol9JcrcyLlFgenzGHx4x1xGtBKhTqw5pVSzIhDVHTQL5xrIDK4vJ+WL+2InO+1qCrrele++lNfvjX5cuQlxHxx/yGCpDSN7To+Md53CJbdCtNDOQL/QjqSUJbXQuenF1cxbsphlXEBG9tg0Xct2XuVK3r6L4RaZ2+pE23Accxj+VTuZe7gPoAcu0LKR6XwRsOwgMFLBYbWg6Ka+NE8XRzEyzNmwwkSpLhBMQH+uU9bmVBV+TKOpWwsp+o=",
-                            "ak.pv": "124",
+                            "ak.t": "1712296190",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==3i7ydvTz/peE4zwEjYt1LOH4I9mqD8SBUeEodBLeTl0TYlTi4HrkC1LFplQiYWUUYZAyW9Ubv/Qr97b6oFz7nf66bba0IdgZValhUrShWqAp6uV9Uai+ARJJ9tVkENHNNQrC9h/kIxOE6e45VUL+FY2DxAvBdFOg6pYntQYLUBdT+DZK9ouhFAnVTq2/CIV4E7sobjHhZirZ7/V51MK/wZG+f4Q9FxkHTBwHYMmedk+ZNhCnrcUEbCERqCWrlikrnjDa6IkUkEoAlatIH9DeM8FkkOVXN+y0kA4uCts0A7EqYInIbAEq/U+8dChiwv7ZgfM1zTDbUAU4TycjgwGy5V7l0XOxhsatOTPcimgQoHZUvxPSq/gM97iUkV6sMCxaJb6SOBTEtKUyIqCjfzTItBPznScE1djW1O9au9MBO5g=",
+                            "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
                         };
@@ -513,215 +504,184 @@
                                                                                 <title>Document</title>
                                                                                 <div
                                                                                     style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E; padding: 4rem 0px; height: 100%;">
-                                                                                    <div style="overflow: auto;">
-                                                                                        <table style="width: 100%;"
-                                                                                               cellpadding="0"
-                                                                                               cellspacing="0"
-                                                                                               border="0">
-                                                                                            <tbody>
-                                                                                            <tr>
-                                                                                                <td style="width: 15%"></td>
-                                                                                                <td>
-                                                                                                    <div
-                                                                                                        style="display: inline-block;">
-                                                                                                        <div>
-                                                                                                            <img
-                                                                                                                src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/29850291-8e3d-be1c-6eec-ac0a262e2676.png"
-                                                                                                                style="width: 100%"/>
+                                                                                    <table style="width: 100%"
+                                                                                           cellpadding="0"
+                                                                                           cellspacing="0" border="0">
+                                                                                        <tbody>
+                                                                                        <tr>
+                                                                                            <td style="width: 15%"></td>
+                                                                                            <td>
+                                                                                                <div
+                                                                                                    style="display: inline-block;">
+                                                                                                    <div>
+                                                                                                        <img
+                                                                                                            src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/29850291-8e3d-be1c-6eec-ac0a262e2676.png"
+                                                                                                            style="width: 100%"/>
+                                                                                                        <div
+                                                                                                            style="background-color: #fff; border: 1px solid #eee">
                                                                                                             <div
-                                                                                                                style="background-color: #fff; display: block; margin: 0px auto; border: 1px solid #eee">
-                                                                                                                <div
-                                                                                                                    style="padding: 2rem 2rem">
-                                                                                                                    <table>
-                                                                                                                        <tbody>
-                                                                                                                        <tr>
-                                                                                                                            <td style="width: 65%">
-                                                                                                                                <h1 style="margin: 0; font-size: 22px">
-                                                                                                                                    Your
-                                                                                                                                    Order
-                                                                                                                                    is
-                                                                                                                                    Shipped!</h1>
-                                                                                                                            </td>
-                                                                                                                            <td style="width: 5%">
-                                                                                                                            </td>
-                                                                                                                            <td style="width: 30%">
-                                                                                                                                <p style="margin: 0; font-size: 14px">
-                                                                                                                                    Order
-                                                                                                                                    No:
-                                                                                                                                    <strong>#{{ $data['id'] }}</strong>
-                                                                                                                                </p>
-                                                                                                                            </td>
-                                                                                                                        </tr>
-                                                                                                                        </tbody>
-                                                                                                                    </table>
-                                                                                                                    <h2 style="font-size: 18px; padding: 10px 0px 4px 0px">
-                                                                                                                        Hi {{ $data['user']['name'] ?? 'Customer' }}</h2>
-                                                                                                                    <p style="font-size: 14px">
-                                                                                                                        We
-                                                                                                                        are
-                                                                                                                        excited
-                                                                                                                        to
-                                                                                                                        let
-                                                                                                                        you
-                                                                                                                        know
-                                                                                                                        that
-                                                                                                                        your
-                                                                                                                        order
-                                                                                                                        has
-                                                                                                                        been
-                                                                                                                        shipped
-                                                                                                                        and
-                                                                                                                        is
-                                                                                                                        on
-                                                                                                                        its
-                                                                                                                        way
-                                                                                                                        to
-                                                                                                                        you.
-                                                                                                                        Below
-                                                                                                                        are
-                                                                                                                        the
-                                                                                                                        details
-                                                                                                                        of
-                                                                                                                        your
-                                                                                                                        shipment:</p>
-                                                                                                                    <ul style="list-style-type: none; padding: 10px 0px; margin: 0; font-size: 14px">
-                                                                                                                        <li style="padding-bottom: 5px">
-                                                                                                                            Tracking
-                                                                                                                            Number
-                                                                                                                            :
-                                                                                                                            #{{ $data['tracking_id'] }}</li>
-                                                                                                                        <li style="padding-bottom: 5px">
-                                                                                                                            Shipping
-                                                                                                                            Service
-                                                                                                                            :
-                                                                                                                            FedEx
-                                                                                                                        </li>
-                                                                                                                        <li style="padding-bottom: 5px">
-                                                                                                                            Estimated
-                                                                                                                            Delivery
-                                                                                                                            Date
-                                                                                                                            : {{ $data['shipment_days'] ?? '' }}</li>
-                                                                                                                    </ul>
-                                                                                                                    <hr/>
-                                                                                                                    <p style="font-size: 14px; margin-top: 10px">
-                                                                                                                        To
-                                                                                                                        track
-                                                                                                                        your
-                                                                                                                        order
-                                                                                                                        in
-                                                                                                                        real-time,
-                                                                                                                        please
-                                                                                                                        use
-                                                                                                                        the
-                                                                                                                        following
-                                                                                                                        tracking
-                                                                                                                        number: {{ $data['tracking_id'] }}
-                                                                                                                        .
-                                                                                                                        You
-                                                                                                                        can
-                                                                                                                        track
-                                                                                                                        the
-                                                                                                                        progress
-                                                                                                                        of
-                                                                                                                        your
-                                                                                                                        shipment
-                                                                                                                        on
-                                                                                                                        our
-                                                                                                                        website
-                                                                                                                        or
-                                                                                                                        directly
-                                                                                                                        through
-                                                                                                                        the
-                                                                                                                        carrier's
-                                                                                                                        website.</p>
-                                                                                                                    <table
-                                                                                                                        width="100%">
-                                                                                                                        <tbody>
-                                                                                                                        <tr>
-                                                                                                                            <td style="width: 15%"></td>
-                                                                                                                            <td>
-                                                                                                                            </td>
-                                                                                                                            <td style="width: 70%">
-                                                                                                                                <div
-                                                                                                                                    style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                                    <a href="https://www.fedex.com/wtrk/track/?trknbr={{ $data['tracking_id'] }}"
-                                                                                                                                       style="color: #fff; text-decoration: none; cursor: pointer">TRACK
-                                                                                                                                        MY
-                                                                                                                                        ORDER</a>
-                                                                                                                                </div>
-                                                                                                                            </td>
-                                                                                                                            <td style="width: 15%"></td>
-                                                                                                                            <td>
-                                                                                                                            </td>
-                                                                                                                        </tr>
-                                                                                                                        </tbody>
-                                                                                                                    </table>
-                                                                                                                    <p style="margin-top: 6rem">
-                                                                                                                        Thank
-                                                                                                                        you
-                                                                                                                        for
-                                                                                                                        choosing
-                                                                                                                        us!</p>
-                                                                                                                    <p>
-                                                                                                                        <strong>SJ
-                                                                                                                            Computers
-                                                                                                                            Team</strong>
-                                                                                                                    </p>
-                                                                                                                </div>
-                                                                                                                <table
-                                                                                                                    cellpadding="0"
-                                                                                                                    cellspacing="0"
-                                                                                                                    border="0"
-                                                                                                                    width="100%"
-                                                                                                                    style="background-color: #EAEDED; font-size: 16px;">
+                                                                                                                style="padding: 2rem 2rem">
+                                                                                                                <table>
                                                                                                                     <tbody>
                                                                                                                     <tr>
-                                                                                                                        <td style="padding: 15px 20px;">
-                                                                                                                            <table
-                                                                                                                                cellpadding="0"
-                                                                                                                                cellspacing="0"
-                                                                                                                                border="0"
-                                                                                                                                align="left">
-                                                                                                                                <tbody>
-                                                                                                                                <tr>
-                                                                                                                                    <td>
-                                                                                                                                        Need
-                                                                                                                                        help?
-                                                                                                                                        <span
-                                                                                                                                            style="color: #0a8ce9;">Support Team</span>
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                </tbody>
-                                                                                                                            </table>
+                                                                                                                        <td style="width: 65%">
+                                                                                                                            <h1 style="margin: 0; font-size: 22px">
+                                                                                                                                Thank
+                                                                                                                                You
+                                                                                                                                for
+                                                                                                                                Purchase!</h1>
                                                                                                                         </td>
-                                                                                                                        <td style="padding: 15px 20px;">
-                                                                                                                            <table
-                                                                                                                                cellpadding="0"
-                                                                                                                                cellspacing="0"
-                                                                                                                                border="0"
-                                                                                                                                align="right">
-                                                                                                                                <tbody>
-                                                                                                                                <tr>
-                                                                                                                                    <td>
-                                                                                                                                        <!-- <LocalPhoneIcon/> -->
-                                                                                                                                        952-452-8884
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                </tbody>
-                                                                                                                            </table>
+                                                                                                                        <td style="width: 3%">
+                                                                                                                        </td>
+                                                                                                                        <td style="width: 30%">
+                                                                                                                            <p style="margin: 0; font-size: 14px">
+                                                                                                                                Order
+                                                                                                                                No:
+                                                                                                                                <strong>#{{ $data['order']['id'] }}</strong>
+                                                                                                                            </p>
                                                                                                                         </td>
                                                                                                                     </tr>
                                                                                                                     </tbody>
                                                                                                                 </table>
+                                                                                                                <h2 style="font-size: 18px; padding: 10px 0px 4px 0px">
+                                                                                                                    Hi
+                                                                                                                    {{ $data['userInfo']['name'] }}</h2>
+                                                                                                                <p style="font-size: 14px; margin: 10px 0px">
+                                                                                                                    We
+                                                                                                                    hope
+                                                                                                                    you're
+                                                                                                                    enjoying
+                                                                                                                    your
+                                                                                                                    recent
+                                                                                                                    purchase
+                                                                                                                    from
+                                                                                                                    SJ
+                                                                                                                    Computers!</p>
+                                                                                                                <p style="font-size: 14px">
+                                                                                                                    Please
+                                                                                                                    take
+                                                                                                                    a
+                                                                                                                    moment
+                                                                                                                    to
+                                                                                                                    share
+                                                                                                                    your
+                                                                                                                    thoughts
+                                                                                                                    with
+                                                                                                                    us.
+                                                                                                                    Your
+                                                                                                                    feedback
+                                                                                                                    is
+                                                                                                                    crucial
+                                                                                                                    in
+                                                                                                                    helping
+                                                                                                                    us
+                                                                                                                    improve
+                                                                                                                    and
+                                                                                                                    provide
+                                                                                                                    better
+                                                                                                                    products
+                                                                                                                    and
+                                                                                                                    services.</p>
+                                                                                                                <div
+                                                                                                                    style="text-align: center; margin: 3rem 0px 0px 0px">
+                                                                                                                    <p style="font-Size: 14px">
+                                                                                                                        Leave
+                                                                                                                        Your
+                                                                                                                        Review
+                                                                                                                        here</p>
+                                                                                                                    <p style="font-Size: 18px">
+                                                                                                                        ☆ ☆ ☆ ☆ ☆</p>
+                                                                                                                </div>
+                                                                                                                <table
+                                                                                                                    width="100%">
+                                                                                                                    <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td style="width: 15%"></td>
+                                                                                                                        <td>
+                                                                                                                        </td>
+                                                                                                                        <td style="width: 70%">
+                                                                                                                            <div
+                                                                                                                                style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
+                                                                                                                                <a href="#"
+                                                                                                                                   style="color: #fff; text-decoration: none; cursor: pointer">LEAVE
+                                                                                                                                    A
+                                                                                                                                    REVIEW</a>
+                                                                                                                            </div>
+                                                                                                                        </td>
+                                                                                                                        <td style="width: 15%"></td>
+                                                                                                                        <td>
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                                <p style="margin-top: 4rem">
+                                                                                                                    Thanks
+                                                                                                                    for
+                                                                                                                    choosing
+                                                                                                                    SJ
+                                                                                                                    Computers,</p>
+                                                                                                                <p style="margin-top: 2rem">
+                                                                                                                    Best,</p>
+                                                                                                                <p>Your
+                                                                                                                    Name</p>
+                                                                                                                <p>SJ
+                                                                                                                    Computer</p>
+                                                                                                                <p style="color: #0a8ce9">
+                                                                                                                    https://sjcomputers.us/</p>
                                                                                                             </div>
+                                                                                                            <table
+                                                                                                                cellpadding="0"
+                                                                                                                cellspacing="0"
+                                                                                                                border="0"
+                                                                                                                width="100%"
+                                                                                                                style="background-color: #EAEDED; font-size: 16px;">
+                                                                                                                <tbody>
+                                                                                                                <tr>
+                                                                                                                    <td style="padding: 15px 20px;">
+                                                                                                                        <table
+                                                                                                                            cellpadding="0"
+                                                                                                                            cellspacing="0"
+                                                                                                                            border="0"
+                                                                                                                            align="left">
+                                                                                                                            <tbody>
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    Need
+                                                                                                                                    help?
+                                                                                                                                    <span
+                                                                                                                                        style="color: #0a8ce9;">Support Team</span>
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                            </tbody>
+                                                                                                                        </table>
+                                                                                                                    </td>
+                                                                                                                    <td style="padding: 15px 20px;">
+                                                                                                                        <table
+                                                                                                                            cellpadding="0"
+                                                                                                                            cellspacing="0"
+                                                                                                                            border="0"
+                                                                                                                            align="right">
+                                                                                                                            <tbody>
+                                                                                                                            <tr>
+                                                                                                                                <td>
+                                                                                                                                    <!-- <LocalPhoneIcon/> -->
+                                                                                                                                    952-452-8884
+                                                                                                                                </td>
+                                                                                                                            </tr>
+                                                                                                                            </tbody>
+                                                                                                                        </table>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
                                                                                                         </div>
                                                                                                     </div>
-                                                                                                </td>
-                                                                                                <td style="width: 15%"></td>
-                                                                                            </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
+                                                                                                </div>
+                                                                                            </td>
+                                                                                            <td style="width: 15%"></td>
+                                                                                        </tr>
+                                                                                        </tbody>
+                                                                                    </table>
                                                                                 </div>
                                                                             </div>
                                                                         </td>
@@ -733,7 +693,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_49f7329602cb866d08bc45be240fb8d9"
+                                                                                   id="section_22a9b3f60a6bb91780aa8a706197121b"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -769,14 +729,7 @@
                                                                                                                     id="dataBlockId-5"
                                                                                                                     style="display:inline-block;width:100%">
                                                                                                                     <p class="last-child">
-                                                                                                                        <a href="*|ARCHIVE|*"><span
-                                                                                                                                style="font-size: 11px">View email in browser</span></a><span
-                                                                                                                            style="font-size: 11px"><br/>*|IFNOT:ARCHIVE_PAGE|**|LIST:ADDRESSLINE|**|END:IF|*<br/></span><a
-                                                                                                                            href="*|UPDATE_PROFILE|*"><span
-                                                                                                                                style="font-size: 11px">update your preferences</span></a><span
-                                                                                                                            style="font-size: 11px"> or </span><a
-                                                                                                                            href="*|UNSUB|*"><span
-                                                                                                                                style="font-size: 11px">unsubscribe</span></a>
+                                                                                                                        <br/>
                                                                                                                     </p>
                                                                                                                 </div>
                                                                                                             </td>
@@ -823,7 +776,7 @@
                                                                                                                                                     <div>
                                                                                                                                                         <div
                                                                                                                                                             data-block-id="6">
-                                                                                                                                                            <a href="http://eepurl.com/iNrews"
+                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"
                                                                                                                                                                target="_blank"
                                                                                                                                                                rel="noopener noreferrer"><img
                                                                                                                                                                     style="max-width:100%"
@@ -883,6 +836,6 @@
         </tbody>
     </table>
 </center>
-<script type="text/javascript" src="/ILAPRi/T0Bu3/ppWRV/4Q/ucut6cNmhwJ7/dj0xMno/Mk8oI/gYUKAY"></script>
+<script type="text/javascript" src="/Or4PqNuKa_kHE_ZQor_A/JuYONwJcwr3p/RwZjAQ/PFdjSi/RIJho"></script>
 </body>
 </html>

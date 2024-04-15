@@ -34,7 +34,7 @@ const PageWrapper = props => {
   // useEffect(() => {
   //   if (window.hasDataLyer) return;
   //   console.log('SJ Comput');
-  //   window.dataLayer = window.dataLayer || [];
+  //  window.dataLayer.push(function() {   this.reset(); })
   //   window.hasDataLyer = true;
   //   window.dataLayer.push({
   //     event: 'pageView',

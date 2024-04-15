@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { deleteItem, deleteLocalItem } from '@store/cart/cartThunks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { generatePath } from '../../../core/utils/helpers';
+import {
+  generatePath,
+  makeDataLayerItemObject,
+} from '../../../core/utils/helpers';
 import './CartOverlay.css';
 import { Box, Stack, Typography } from '@mui/material';
 import vetimges from '../../../assets/images/setr.png';
@@ -95,12 +98,29 @@ const SideBarCartLayer2 = ({ isOpen, toggleSidebar }) => {
       };
 
       const response = await getProductsCategory(filterObject);
+
+      viewItemDataLayer(response?.data?.data);
       setBestSeller(response?.data?.data);
     } catch (err) {
       console.log(err);
     } finally {
       setLoading(false);
     }
+  };
+
+  const viewItemDataLayer = (products, categorySlug) => {
+    console.log(
+      'view_item_list data layer best sellers category',
+      makeDataLayerItemObject(products),
+    );
+    window.dataLayer.push(function () {
+      this.reset();
+    });
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'best-sellers',
+      items: makeDataLayerItemObject(products),
+    });
   };
 
   useEffect(() => {

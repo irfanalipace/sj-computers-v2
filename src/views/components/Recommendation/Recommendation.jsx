@@ -12,21 +12,23 @@ export default function Recommendation({ prod, dataLayer }) {
   const products = useSelector(state => state?.products?.products);
   useEffect(() => {
     getProduct();
+    console.log(dataLayer, products);
     if (dataLayer && products.length) {
       viewItemDataLayer(products, 'Recommended_Product');
     }
   }, []);
 
   const viewItemDataLayer = (products, categorySlug) => {
-    console.print(
+    console.log(
       'view_item_list data layer',
-      dataLayer,
-      categorySlug,
+      'recommm',
+      // categorySlug,
       makeDataLayerItemObject(products),
     );
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+
+    window.dataLayer.push(function () {
+      this.reset();
+    });
     window.dataLayer.push({
       event: 'view_item_list',
       item_list_name: categorySlug,
@@ -49,7 +51,9 @@ export default function Recommendation({ prod, dataLayer }) {
         className='recommendation-container product-section'
         style={{ padding: '0px 50px' }}>
         <div className='recommendation-inner'>
-          <h3 className='product-section-heading' style={{marginLeft:'-23px'}}>
+          <h3
+            className='product-section-heading'
+            style={{ marginLeft: '-23px' }}>
             People who browsed similar items also showed interest in these
           </h3>
           <div className='slider-wrapper'>

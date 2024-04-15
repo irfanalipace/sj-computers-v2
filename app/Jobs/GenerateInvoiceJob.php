@@ -36,13 +36,13 @@ class GenerateInvoiceJob implements ShouldQueue
      * @return void
      */
     public function handle()
-    {      
+    {
         // Now, modify the initial code to integrate this change
         $order['orderDetail'] = $this->cartData;
-        $order['OrderAddress'] = $this->order['OrderAddress'];
-        $order['order'] = $this->order['order'];
-        
-        if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {            
+        $order['OrderAddress'] = $this->order['OrderAddress']->toArray();
+        $order['order'] = $this->order['order']->toArray();
+
+        if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {
             $userInfoForPayPal = [
                 'id' => $this->user->id,
                 'name' => ($this->userType == StatusEnum::GUEST) ? $this->user->full_name : $this->user->name,
@@ -55,11 +55,13 @@ class GenerateInvoiceJob implements ShouldQueue
             // Assuming you want to keep the original object format for other payment types
             $order['userInfo'] = $this->user;
         }
-       
+
         //Email to customer
         $email = $this->user->email;
         $ccEmail = 'orders@sjcomputers.us';
+
         //order mail for customer
+
         Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to($email)->subject('Order Placed.');
@@ -68,6 +70,10 @@ class GenerateInvoiceJob implements ShouldQueue
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
             $m->to(config('mail.from.address'))->subject('Order Placed.');
             $m->cc($ccEmail);
+        });
+        Mail::send('emails.order.thank-you-page', ['data' => $order], function ($m) use ($email) {
+            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
+            $m->to(config($email))->subject('Thank you for Purchase.');
         });
     }
 }

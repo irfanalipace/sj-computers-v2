@@ -13,6 +13,7 @@ import MobileThanku from './MobileThanku';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import { getPaypalOrderDetail } from '../../../core/api/products';
+import { makeDataLayerItemObject } from '@utils/helpers';
 export default function ThankYou() {
   const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
@@ -97,16 +98,16 @@ export default function ThankYou() {
 
       // clearCartLocally();
       // dispatch(CLEAR_CART());
-      if (!window.dataLayer) {
-        window.dataLayer = window.dataLayer || [];
-      }
+      window.dataLayer.push(function () {
+        this.reset();
+      });
       console.log('purchase data lyer');
       window.dataLayer.push({
         event: 'purchase',
         currency: 'USD',
-        // value: data.cartItem.price,
-        transaction_id: '123',
-        // items: makeDataLayerItemObject([{ ...data }]),
+        value: order?.total_amount,
+        transaction_id: order.id,
+        items: makeDataLayerItemObject(order?.order_item || []),
       });
     } else {
       // navigate('/')

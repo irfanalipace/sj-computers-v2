@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AddToCart = () => {
   const { productId, itemAdded } = useParams();
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const cart = useSelector(state => state?.cart?.cart);
   const cartItems = useSelector(state => state?.cart?.cart?.slice().reverse());
   const product = cart?.find(item => item?.product?.asin == productId);
@@ -71,9 +72,11 @@ const AddToCart = () => {
           <SimilarInterestSlider products={featureProducts} />
         </Grid>
       </Grid>
-      <div className='hidden-on-desktop'>
-        <SimilarInterestSlider products={featureProducts} />
-      </div>
+      {isMobile && (
+        <Box className='hidden-on-desktop'>
+          <SimilarInterestSlider products={featureProducts} />
+        </Box>
+      )}
     </div>
   );
 };

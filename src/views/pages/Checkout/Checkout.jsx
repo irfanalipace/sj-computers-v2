@@ -113,9 +113,9 @@ export default function Checkout() {
   }, []);
 
   useEffect(() => {
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer.push(function () {
+      this.reset();
+    });
 
     window.dataLayer.push({
       event: 'begin_checkout',

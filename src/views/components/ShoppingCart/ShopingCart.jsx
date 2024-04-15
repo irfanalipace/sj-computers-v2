@@ -97,9 +97,9 @@ export const ShopingCart = ({ onFormSubmit, form }) => {
   }, [cartItems]);
 
   useEffect(() => {
-    if (!window.dataLayer) {
-      window.dataLayer = window.dataLayer || [];
-    }
+    window.dataLayer.push(function () {
+      this.reset();
+    });
 
     window.dataLayer.push({
       event: 'view_cart',

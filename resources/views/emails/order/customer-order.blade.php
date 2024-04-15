@@ -576,7 +576,6 @@
                                                                                                                 </table>
                                                                                                                 <hr/>
                                                                                                                 <table style="width: 100%">
-{{--                                                                                                                    @dd($data);--}}
                                                                                                                     <tbody>
                                                                                                                     @foreach ($data['orderDetail']['order_detail']['order_item'] as $orderItem)
                                                                                                                         <tr>

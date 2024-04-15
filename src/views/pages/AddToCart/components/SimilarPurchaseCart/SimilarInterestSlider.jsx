@@ -15,6 +15,8 @@ import AddCartComponents from '../../../../components/Product/CheckOutCard/AddCa
 
 import StarRatings from 'react-star-ratings';
 import { featureProductsApi } from '@api/products';
+import { useEffect } from 'react';
+import { makeDataLayerItemObject } from '../../../../../core/utils/helpers';
 
 SwiperCore.use([Navigation]);
 
@@ -22,6 +24,30 @@ const SimilarInterestSlider = ({ products }) => {
   const orderEstimatedDelivery = useSelector(
     state => state.orders.orderEstimatedDelivery,
   );
+
+  const viewItemDataLayer = products => {
+    console.log(
+      'view_item_list data layer',
+      'recommended',
+      makeDataLayerItemObject(products),
+    );
+
+    window.dataLayer.push(function () {
+      this.reset();
+    });
+
+    window.dataLayer.push({
+      event: 'view_item_list',
+      item_list_name: 'recommended',
+      items: makeDataLayerItemObject(products),
+    });
+  };
+
+  useEffect(() => {
+    if (products.length) {
+      viewItemDataLayer(products);
+    }
+  }, [products]);
 
   const ProductDetails = ({ product }) => (
     <div className='pb-3 slider-details'>

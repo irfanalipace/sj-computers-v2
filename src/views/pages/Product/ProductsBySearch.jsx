@@ -42,7 +42,7 @@ const ProductsList = () => {
         if (isNewSearch()) {
           paginationProps.page = 1;
         }
-        // debugger;
+
         const response = await searchProductsApi({
           name: searchString,
           category_id: selectedCategory,
