@@ -64,11 +64,11 @@ class GenerateInvoiceJob implements ShouldQueue
 
         Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to($email)->subject('Order Placed.');
+            $m->to($email)->subject('Order Confirmed.');
         });
         Mail::send('emails.order.order-send-to-admin', ['data' => $order], function ($m) use ($email, $ccEmail) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to(config('mail.from.address'))->subject('Order Placed.');
+            $m->to(config('mail.from.Confirmed'))->subject('Order Placed.');
             $m->cc($ccEmail);
         });
         Mail::send('emails.order.thank-you-page', ['data' => $order], function ($m) use ($email) {
