@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Square;
 
+use App\Rules\PhoneFormat;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CardRequest extends FormRequest
@@ -30,7 +31,7 @@ class CardRequest extends FormRequest
             'shipping_address.email' => 'required|email',
             'shipping_address.country' => 'required',
             'shipping_address.full_name' => 'required|max:50',
-            'shipping_address.phone_number' => 'required|regex:/^\+?[0-9]{10,15}$/',
+            'shipping_address.phone_number' => 'required', new PhoneFormat(),
             'shipping_address.address' => 'required',
             'shipping_address.city' => 'required',
             'shipping_address.state' => 'required',
@@ -44,7 +45,7 @@ class CardRequest extends FormRequest
                 'shipping_address.email' => 'required|email',
                 'shipping_address.country' => 'required',
                 'shipping_address.full_name' => 'required|max:50',
-                'shipping_address.phone_number' => 'required|regex:/^\+?[0-9]{10,15}$/',
+                'shipping_address.phone_number' => 'required', new PhoneFormat(),
                 'shipping_address.address' => 'required',
                 'shipping_address.city' => 'required',
                 'shipping_address.state' => 'required',
