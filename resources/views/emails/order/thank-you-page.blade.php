@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -582,16 +582,6 @@
                                                                                                                     products
                                                                                                                     and
                                                                                                                     services.</p>
-                                                                                                                <div
-                                                                                                                    style="text-align: center; margin: 3rem 0px 0px 0px">
-                                                                                                                    <p style="font-Size: 14px">
-                                                                                                                        Leave
-                                                                                                                        Your
-                                                                                                                        Review
-                                                                                                                        here</p>
-                                                                                                                    <p style="font-Size: 18px">
-                                                                                                                        ☆ ☆ ☆ ☆ ☆</p>
-                                                                                                                </div>
                                                                                                                 <table
                                                                                                                     width="100%">
                                                                                                                     <tbody>
@@ -602,7 +592,7 @@
                                                                                                                         <td style="width: 70%">
                                                                                                                             <div
                                                                                                                                 style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                                <a href="#"
+                                                                                                                                <a href="https://sjcomputers.us/orders-review"
                                                                                                                                    style="color: #fff; text-decoration: none; cursor: pointer">LEAVE
                                                                                                                                     A
                                                                                                                                     REVIEW</a>
