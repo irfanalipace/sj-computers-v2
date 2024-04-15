@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Square\CardRequest;
 use App\Jobs\Error\SendErrorMail;
+use App\Jobs\OrderPlacedEmailJob;
 use App\Jobs\PaymentFailedJob;
 use App\Models\Guest;
 use App\Models\User;
@@ -56,37 +57,37 @@ class SquareController extends BaseController
 
     // charge process
     public function processPayment($request,$user,$userType,$cartDetails)
-    {      
+    {
         try {
             $idempotencyKey = uniqid();
-            
+
             // /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
             $userIdToPass = $user->id;
             $user_type = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
             $cartItems = ($userType == StatusEnum::GUEST) ? $request->cart_items : [];
-          
+
             //create customer || retrieve customer if already added
             if ($user->square_cus_id == null) {
                 $customer = $this->createCustomer($user,$user_type);
             } else {
                 $customer = $this->getCustomer($user);
-            }           
-          
+            }
+
             DB::beginTransaction();
-         
+
             $cartContent = (isset($request->is_buy_now ) && $request->is_buy_now == true) ? \Cart::session($userIdToPass)->get($request->cart_id) : \Cart::session($userIdToPass)->getContent();
             $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
-           
+
             $check_product_first = $this->repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($request->is_buy_now ) && $request->is_buy_now),StatusEnum::PAYMENTTYPESQUARE);
-           
+
             if (!$check_product_first) {
                 $error = ['cartError' => 'Product quantity is invalid.'];
                 throw new Exception(json_encode($error));
             }
-            
+
             // create invoice along with order
             $orderData = [];
-            
+
             $orderData['total_amount'] = number_format($cartDetails['totalAmount'], 2, '.', '');
             $orderData['sub_total'] = number_format($cartDetails['subTotal'], 2, '.', '');
             $orderData['item_qty'] =  $cartDetails['totalQty'];
@@ -96,7 +97,7 @@ class SquareController extends BaseController
             $orderData['estimate_day'] =  Carbon::now()->addWeekdays(5)->format('l d-m-Y');
 
             $cartConditions = Cart::session($userIdToPass)->getConditions('shipment_days');
-         
+
             foreach ($cartConditions as $condition) {
                 $amount = $condition->getValue(); // the value of the condition
                 $orderData['shipment_amount'] = $amount;
@@ -106,16 +107,16 @@ class SquareController extends BaseController
                 $orderData['shipment_amount'] = $this->shipment_amount ?? 0;
                 $orderData['estimate_day'] =  $this->estimate_days ?? Carbon::now()->addWeekdays(5)->format('l d-m-Y');
             }
-            
+
             $order = $this->repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems,(isset($request->is_buy_now ) && $request->is_buy_now));
             if (!$order) {
                 $errorMessage = 'Order not found';
                 PaymentFailedJob::dispatch($order, $errorMessage);
                throw new Exception('Please Try Again.');
             }
-            
-            $orderData ['order_detail']= $order['order'];
-           
+
+            $orderData ['order_detail']= $order['order']->toArray();
+
             // Get card Token
             $amount_money = new Money();
             $amount_money->setAmount($cartDetails['totalAmount'] * 100);
@@ -130,14 +131,15 @@ class SquareController extends BaseController
             $body->setNote('Web Order :'.$order['order']['id']);
 
             $api_response = $this->squareClient->getPaymentsApi()->createPayment($body);
-            
+
             if ($api_response->isSuccess()) {
 
                 $result = $api_response->getResult();
                 // update invoice column payer_id
                 Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $api_response->getResult()->getPayment()->getId()]);
                 //sending invoice email of the payment to user
-                GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPESQUARE,$userType);
+//                GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPESQUARE,$userType);
+                OrderPlacedEmailJob::dispatch($user, $orderData, StatusEnum::PAYMENTTYPESQUARE, $order, $userType);
 
                 //clear cart after successfull payment
                 (isset($request->is_buy_now ) && $request->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($request->cart_id): Cart::session($userIdToPass)->clear();
@@ -176,7 +178,7 @@ class SquareController extends BaseController
             if ($api_response->isSuccess()) {
                 $customer_id = $api_response->getResult()->getCustomer()->getId();
                 //saving customer id in user table square_cus_id column
-              
+
                 if ($userType != StatusEnum::GUEST) {
                     User::whereId($user->id)->update(['square_cus_id' => $customer_id]);
                 } else {

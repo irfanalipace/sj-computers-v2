@@ -9,24 +9,29 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
-class GenerateInvoiceJob implements ShouldQueue
+class OrderPlacedEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    private $user, $cartData,$order,$paymentType,$userType;
-    public function __construct($user, $cartData, $order,$paymentType,$userType)
+    protected $user;
+    protected $orderData;
+    protected $paymentType;
+    protected $order;
+    protected $userType;
+
+    public function __construct($user, $orderData, $paymentType, $order, $userType)
     {
-        $this->cartData = $cartData;
         $this->user = $user;
-        $this->order = $order;
+        $this->orderData = $orderData;
         $this->paymentType = $paymentType;
+        $this->order = $order;
         $this->userType = $userType;
     }
 
@@ -37,10 +42,12 @@ class GenerateInvoiceJob implements ShouldQueue
      */
     public function handle()
     {
+        $AdminEmail = 'orders@sjcomputers.us';
+
         // Now, modify the initial code to integrate this change
-        $order['orderDetail'] = $this->cartData;
-        $order['OrderAddress'] = $this->order['OrderAddress']->toArray();
-        $order['order'] = $this->order['order']->toArray();
+        $order['OrderDetail'] = $this->orderData;
+        $order['PaymentType'] = $this->paymentType;
+//        $order['Order'] = $this->order['order']->toArray();
 
         if ($this->paymentType == StatusEnum::PAYMENTTYPEPAYPAL ) {
             $userInfoForPayPal = [
@@ -56,19 +63,10 @@ class GenerateInvoiceJob implements ShouldQueue
             $order['userInfo'] = $this->user;
         }
 
-        //Email to customer
-        $email = $this->user->email;
-        $AdminEmail = 'orders@sjcomputers.us';
-
-        //order mail for customer
-
-        Mail::send('emails.order.customer-order', ['data' => $order], function ($m) use ($email) {
+//        dd($order);
+        Mail::send('emails.order.order-placed', ['data' => $order], function ($m) use ($AdminEmail) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to($email)->subject('Order Confirmed.');
-        });
-        Mail::send('emails.order.thank-you-page', ['data' => $order], function ($m) use ($email) {
-            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to($email)->subject('Thank you for Purchase.');
+            $m->to($AdminEmail)->subject('Order Placed.');
         });
     }
 }

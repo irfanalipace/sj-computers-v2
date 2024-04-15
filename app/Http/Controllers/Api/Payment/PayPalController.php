@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api\Payment;
 use App\Classes\StatusEnum;
 use App\Http\Controllers\Controller;
 use App\Jobs\Error\SendErrorMail;
+use App\Jobs\OrderPlacedEmail;
+use App\Jobs\OrderPlacedEmailJob;
 use App\Jobs\PaymentFailedJob;
 use App\Models\Invoice;
 use App\Models\cache;
@@ -37,7 +39,7 @@ class PayPalController extends Controller
 
     public function processPayment($request,$user,$userType,$cartDetails)
     {
-       
+
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->createOrder([
@@ -57,7 +59,7 @@ class PayPalController extends Controller
 
         ]);
         $cartItems = (isset($request->cart_items)) ?  $request->cart_items : [];
-      
+
         if(isset($response['id']) && $response['id']!=null) {
             $detail = [
                 "shippping_address" =>$request->shipping_address,
@@ -72,32 +74,32 @@ class PayPalController extends Controller
                 'key' => 'paypal_transaction_'.$response['id'],
                 'value' => json_encode($detail,true)
             ]);
-          
+
             // Cache::put("paypal_transaction_".$response['id'],$detail, 1800); // 1800 seconds = 30 minutes
-              
+
             // Session::put('shippping_address', $request->shipping_address);
-           
+
             foreach($response['links'] as $link) {
                 if($link['rel'] === 'approve') {
-                    sleep(3); 
+                    sleep(3);
                     return $link['href'];
                 }
             }
         } else {
-            
+
             return redirect()->route('cancel');
         }
     }
 
     public function paypalSuccess(Request $request,OrderRepository $repository)
-    {       
-        
+    {
+
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
-       
+
         DB::beginTransaction();
-        if(isset($response['status']) && $response['status'] == 'COMPLETED') 
+        if(isset($response['status']) && $response['status'] == 'COMPLETED')
         {
 
             $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
@@ -107,8 +109,8 @@ class PayPalController extends Controller
             }
 
             $getCache = json_decode($cache->value);
-        
-            $shippingAddress = $getCache->shippping_address; 
+
+            $shippingAddress = $getCache->shippping_address;
             $shippingAddressForm['country'] = $shippingAddress->country;
             $shippingAddressForm['full_name'] = $shippingAddress->full_name;
             $shippingAddressForm['phone_number'] = $shippingAddress->phone_number;
@@ -120,25 +122,25 @@ class PayPalController extends Controller
             $shippingAddressForm['zip_code'] = $shippingAddress->zip_code;
             $shippingAddressForm['permanent_address'] = $shippingAddress->permanent_address ?? false;
 
-            $user =  $getCache->user; 
-            $userType =  $getCache->user_type; 
-            $cartDetails = $getCache->cart_details; 
-        
-        
+            $user =  $getCache->user;
+            $userType =  $getCache->user_type;
+            $cartDetails = $getCache->cart_details;
+
+
             /*if userId is dummy the i will pass guest_user_id else i will pass userId*/
             $userIdToPass = ($userType != StatusEnum::GUEST) ? $user->id : $user->email;
             $userType = ($userType != StatusEnum::GUEST) ? StatusEnum::USER : StatusEnum::GUEST;
             $cartItems = ($userType == StatusEnum::GUEST) ? $getCache->cart_items : [];
-        
+
             $cartContent = (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->get($getCache->cart_id) : \Cart::session($userIdToPass)->getContent();
-        
+
             $listofItems = ($userType == StatusEnum::GUEST) ? $cartItems : $cartContent;
-            
+
             $check_product_first =  $repository->checkProduct($listofItems,$userIdToPass,$userType,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true),StatusEnum::PAYMENTTYPEPAYPAL);
-            if (!$check_product_first) { 
+            if (!$check_product_first) {
                 return redirect('cart?error='."Product quantity is invalid");
             }
-            
+
             // create invoice along with order
             $orderData = [];
 
@@ -161,9 +163,9 @@ class PayPalController extends Controller
                 $orderData['shipment_amount'] =  0;
                 $orderData['estimate_day'] =   Carbon::now()->addWeekdays(5)->format('l d-m-Y');
             }
-            
-            
-              
+
+
+
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
                 $errorMessage = 'Order not found';
@@ -177,7 +179,7 @@ class PayPalController extends Controller
             $orderDetailOutput['order_no'] = $order['order']['id'];
             $orderDetailOutput['order_date'] = $order['order']['created_at']->format('Y-m-d H:i:s');
             $orderDetailOutput['delivery_date'] = $orderData['estimate_day']; // Delivery Details
-            $orderDetailOutput['payment_type'] = 'PayPal'; 
+            $orderDetailOutput['payment_type'] = 'PayPal';
             $orderDetailOutput['id'] = $response['id'];
             $orderDetailOutput['subtotal'] = $orderData['sub_total'];
             $orderDetailOutput['total'] = $orderData['total_amount'];
@@ -190,36 +192,39 @@ class PayPalController extends Controller
                     'price' => $item->price
                 ];
             });
-            
+
             Invoice::where('id', $order['invoice_id'])->update(['payer_id' => $response['id'] ]);
-                GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);           
-            
+            OrderPlacedEmailJob::dispatch($user, $orderData, StatusEnum::PAYMENTTYPEPAYPAL, $order, $userType);
+//                GenerateInvoiceJob::dispatch($user, $orderData, $order,StatusEnum::PAYMENTTYPEPAYPAL,$userType);
+
+
+
                 // If you need to display more details, add them here accordingly
 
                 //clear cart after successfull payment
             (isset($getCache->is_buy_now ) && $getCache->is_buy_now == true) ? \Cart::session($userIdToPass)->remove($getCache->cart_id) : \Cart::session($userIdToPass)->clear();
-                
-                //clear cart condition            
+
+                //clear cart condition
             \Cart::session($userIdToPass)->clearCartConditions();
 
             /* clear cache */
                 // $cache->delete();
 
                 DB::commit();
-                
+
                 return redirect()->to('thank-you?orderSuccess=true'.'&&order_no='.$orderDetailOutput['order_no']);
-                
+
 
         } else {
-           
+
             DB::rollBack();
             return redirect('checkout?error=Order already capture Only one order per capture allowed.');
         }
     }
 
     public function paypalCancel($error = 'Payment is cancelled.')
-    { 
+    {
         return redirect(config('app.react_app_url').'checkout?error=' . $error.'&payment_type=paypal');
-       
+
     }
 }
