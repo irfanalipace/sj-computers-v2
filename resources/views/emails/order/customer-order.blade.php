@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -564,36 +564,62 @@
                                                                                                                 purchase.
                                                                                                             </p>
 
-                                                                                                            <div style="margin: 3rem 0 0 0; padding: 1rem">
-                                                                                                                <table style="width: 100%; font-size: 13px;">
+                                                                                                            <div
+                                                                                                                style="margin: 3rem 0 0 0; padding: 1rem">
+                                                                                                                <table
+                                                                                                                    style="width: 100%; font-size: 13px;">
                                                                                                                     <tbody>
                                                                                                                     <tr>
-                                                                                                                        <td style="width: 60%;">Order Details</td>
-                                                                                                                        <td>Delivery by</td>
-                                                                                                                        <td>Price</td>
+                                                                                                                        <td style="width: 60%;">
+                                                                                                                            Order
+                                                                                                                            Details
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            Delivery
+                                                                                                                            by
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            Price
+                                                                                                                        </td>
                                                                                                                     </tr>
                                                                                                                     </tbody>
                                                                                                                 </table>
                                                                                                                 <hr/>
-                                                                                                                <table style="width: 100%">
+                                                                                                                <table
+                                                                                                                    style="width: 100%">
                                                                                                                     <tbody>
                                                                                                                     @foreach ($data['orderDetail']['order_detail']['order_item'] as $orderItem)
                                                                                                                         <tr>
                                                                                                                             <td style="width: 20%">
-                                                                                                                                <img src="{{ $orderItem['product']['image'][0] ?? '' }}"/>
+                                                                                                                                <img
+                                                                                                                                    src="{{ $orderItem['product']['image'][0] ?? '' }}"
+                                                                                                                                    style="width: 60%; object-fit: contain"/>
                                                                                                                             </td>
                                                                                                                             <td style="width: 40%">
-                                                                                                                                <div style="margin: 10px">
-                                                                                                                                    <p style="font-size: 14px"><strong>{{ $orderItem['product_name'] ?? 'null' }}</strong></p>
-{{--                                                                                                                                    <p style="font-size: 10px; color: #434343">Processor : intel i9 13th gen</p>--}}
-{{--                                                                                                                                    <p style="font-size: 10px; color: #434343">Ram : 16 GB</p>--}}
-{{--                                                                                                                                    <p style="font-size: 10px; color: #434343">SSD : 1TB</p>                                                                                                                                </div>--}}
+                                                                                                                                <div
+                                                                                                                                    style="margin: 10px">
+                                                                                                                                    <p style="font-size: 14px">
+                                                                                                                                        <strong>
+                                                                                                                                            @php
+                                                                                                                                                $name = $orderItem['product_name'] ?? 'null';
+                                                                                                                                                $words = explode(' ', $name); // Split the name into an array of words
+                                                                                                                                                $shortenedName = implode(' ', array_slice($words, 0, 3)); // Take the first three words and join them back into a string
+
+                                                                                                                                                echo strlen($name) > strlen($shortenedName) ? $shortenedName . '...' : $name;
+                                                                                                                                            @endphp
+                                                                                                                                        </strong>
+                                                                                                                                    </p>
+                                                                                                                                {{--                                                                                                                                    <p style="font-size: 10px; color: #434343">Processor : intel i9 13th gen</p>--}}
+                                                                                                                                {{--                                                                                                                                    <p style="font-size: 10px; color: #434343">Ram : 16 GB</p>--}}
+                                                                                                                                {{--                                                                                                                                    <p style="font-size: 10px; color: #434343">SSD : 1TB</p>                                                                                                                                </div>--}}
                                                                                                                             </td>
                                                                                                                             <td>
-                                                                                                                                <div style="font-size: 13px">{{ $data['orderDetail']['order_detail']['shipment_days'] ?? 'null' }}</div>
+                                                                                                                                <div
+                                                                                                                                    style="font-size: 13px">{{ $data['orderDetail']['order_detail']['shipment_days'] ?? 'null' }}</div>
                                                                                                                             </td>
                                                                                                                             <td>
-                                                                                                                                <div style="font-size: 13px">
+                                                                                                                                <div
+                                                                                                                                    style="font-size: 13px">
                                                                                                                                     <strong>${{ number_format((float) $orderItem['price'], 2) }}</strong>
                                                                                                                                 </div>
                                                                                                                             </td>
@@ -609,7 +635,7 @@
                                                                                                                 style="width: 100%; font-size: 13px; margin-top: 0.5rem;">
                                                                                                                 <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 60%"></td>
+                                                                                                                    <td style="width: 40%"></td>
                                                                                                                     <td style="text-align: left;">
                                                                                                                         <div>
                                                                                                                             Total:
@@ -619,7 +645,7 @@
                                                                                                                         ${{ number_format((float) $data['orderDetail']['sub_total'], 2, '.', '') }}</td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 60%"></td>
+                                                                                                                    <td style="width: 40%"></td>
                                                                                                                     <td style="text-align: left;">
                                                                                                                         <div>
                                                                                                                             Shipping
@@ -630,7 +656,7 @@
                                                                                                                         ${{ number_format((float) $data['orderDetail']['shipment_amount'], 2, '.', '') }}</td>
                                                                                                                 </tr>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 60%"></td>
+                                                                                                                    <td style="width: 40%"></td>
                                                                                                                     <td style="text-align: left;">
                                                                                                                         <div>
                                                                                                                             <strong>Grand
@@ -660,16 +686,7 @@
                                                                                                                         <strong>Billing
                                                                                                                             Address:</strong><br/><br/>
                                                                                                                         <p style="font-size:13px;">
-                                                                                                                            No,10
-                                                                                                                            A,
-                                                                                                                            Street
-                                                                                                                            No
-                                                                                                                            4<br/>Area
-                                                                                                                            Number
-                                                                                                                            and
-                                                                                                                            city
-                                                                                                                            or
-                                                                                                                            Country
+                                                                                                                            {{ $data['OrderAddress']['address'] }}
                                                                                                                         </p>
                                                                                                                     </td>
                                                                                                                 </tr>
@@ -889,7 +906,7 @@
         </tr>
         </tbody>
     </table>
+
+    <br>
+    <br>
 </center>
-<script type="text/javascript" src="/Or4PqNuKa_kHE_ZQor_A/JuYONwJcwr3p/RwZjAQ/PFdjSi/RIJho"></script>
-</body>
-</html>
