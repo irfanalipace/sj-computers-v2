@@ -403,30 +403,30 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "m77ugxqxfejyezqpsidq-f-1ef0e0bd3-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "w27vmzaxhdqiozq5au3a-f-2a0a75c98-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
                             "ak.ai": parseInt("963350", 10),
                             "ak.ol": "0",
-                            "ak.cr": 115,
+                            "ak.cr": 148,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "69d9dbae",
-                            "ak.r": 44715,
+                            "ak.rid": "68e543f1",
+                            "ak.r": 46013,
                             "ak.a2": e,
                             "ak.m": "x",
                             "ak.n": "essl",
-                            "ak.bpcip": "103.255.67.0",
-                            "ak.cport": 50090,
-                            "ak.gh": "23.44.214.25",
+                            "ak.bpcip": "182.191.86.0",
+                            "ak.cport": 54222,
+                            "ak.gh": "2.16.152.96",
                             "ak.quicv": "",
                             "ak.tlsv": "tls1.3",
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712296455",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==Afshw1+QqdGeuB6+Kr1zZJaoiKcJNVORUM7SA1V/UmMthhp+qIAFEMXwogdniuR2CpnmUbD4sypAa3sJxgdWnauVX2x1nwo+XQZac1uiRZy7z3MIPUSbck9khvFPzVHTCXRTVx++cfqe+1i3Uhf1AHfgV8LBKG/RnfeO/2Xw/1t6jmTuVKtP0KEkirl6/2zrYjG8PDmHXLaD2anaJiBoIijOo8DU/zR/s/7XZElwvmzWcEN4FRhJ8rKh0CqPvl7QhCmBxpIYgASxU/0q2pEYoS1KcYmhri6mbq4B71Gq3h7dpzHgomnSBhyKOesfoHcjHDJGPuFCb4UcL1YZgklgeMmfrYQgviwulG3voZkR/0nL4eZueIrvL7UF34wudtqp7oERTIkoFxjVMDvJxEGKNUs935KecyhL+PSonyqNcPI=",
+                            "ak.t": "1713177910",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==PAExq1x0X8/7oN77AegdNw2M4bZ0PsnOa5xLXUMpyw6H3eAmxgiQ2EQyj9SwLEilD+F8qbgDauoGgQgKD76DZ2qKqFS847L416rrQEIXdlzcSTfvAsC/927J6fCnz9k3nCtVdKC4ttMuyoxWGvFUwjPJFytEKoQt8M2a6/SK9n0KB3KCKWk9B47+jkzCND9ajyQRU4jiboQPTOCeg8a1MlGDuB+0hF5nscLlJbyl+mAxtfYi8Sqo1bZghVJO83ki+RW/U4C2g44syJ3RtBZ7Le8xOKipaNtU28ty1+t3p6vAItunQG7BIvNBcLQG9LUV9FJdJI2BXtRGqjxtv/8oAEjM/knAqejnjm/U/6bEAErHlMv3Wv6jVxZA9qHX0VSxCmPipZBtmeXSK5eWWS36g1M68C+Hndw2WhQid+vBTMU=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -503,7 +503,7 @@
                                                                             <div data-block-id="11" class="mceCode">
                                                                                 <title>Document</title>
                                                                                 <div
-                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E;  padding: 4rem 0px; height: 100%;">
+                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E; padding: 4rem 0px; height: 100%;">
                                                                                     <table>
                                                                                         <tbody>
                                                                                         <tr>
@@ -523,49 +523,57 @@
                                                                                                             <table>
                                                                                                                 <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 60%">
+                                                                                                                    <td style="width: 50%">
                                                                                                                         <h1 style="margin: 0; font-size: 22px">
+                                                                                                                            Your
                                                                                                                             Order
-                                                                                                                            Confirmed!</h1>
+                                                                                                                            Placed
+                                                                                                                            Successfully!</h1>
                                                                                                                     </td>
                                                                                                                     <td style="width: 10%">
                                                                                                                     </td>
-                                                                                                                    <td style="width: 30%">
+                                                                                                                    <td style="width: 40%">
                                                                                                                         <p style="margin: 0; font-size: 14px">
                                                                                                                             Order
                                                                                                                             No:
-                                                                                                                            <strong>#{{ $data['order']['id'] }}</strong>
+                                                                                                                            <strong>#{{ $data['OrderDetail']['order_detail']['id'] ?? ''}}</strong>
                                                                                                                         </p>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
                                                                                                             <h2 style="font-size: 18px; padding: 10px 0px">
-                                                                                                                Hi {{ $data['userInfo']['name'] }}</h2>
+                                                                                                                Hi
+                                                                                                                {{ $data['userInfo']['name'] ?? 'Admin' }}
+                                                                                                            </h2>
                                                                                                             <p style="font-size: 14px">
                                                                                                                 Thank
                                                                                                                 you for
-                                                                                                                your
-                                                                                                                order.
-                                                                                                                We will
-                                                                                                                send you
-                                                                                                                a
-                                                                                                                confirmation
-                                                                                                                when
+                                                                                                                choosing
+                                                                                                                SJ
+                                                                                                                Computers
+                                                                                                                for your
+                                                                                                                shopping
+                                                                                                                needs.
+                                                                                                                We
+                                                                                                                are
+                                                                                                                delighted
+                                                                                                                to
+                                                                                                                inform
+                                                                                                                you that
                                                                                                                 your
                                                                                                                 order
-                                                                                                                ships.
-                                                                                                                Please
-                                                                                                                find
-                                                                                                                below
-                                                                                                                the
-                                                                                                                receipt
+                                                                                                                has been
+                                                                                                                successfully
+                                                                                                                placed.
+                                                                                                                Below
+                                                                                                                are the
+                                                                                                                details
                                                                                                                 of your
-                                                                                                                purchase.
-                                                                                                            </p>
-
+                                                                                                                order: </p>
                                                                                                             <div
-                                                                                                                style="margin: 3rem 0 0 0; padding: 1rem">
+                                                                                                                style="margin: 3rem 0 0 0; padding: 1re">
+                                                                                                                <hr/>
                                                                                                                 <table
                                                                                                                     style="width: 100%; font-size: 13px;">
                                                                                                                     <tbody>
@@ -574,21 +582,15 @@
                                                                                                                             Order
                                                                                                                             Details
                                                                                                                         </td>
-                                                                                                                        <td>
-                                                                                                                            Delivery
-                                                                                                                            by
-                                                                                                                        </td>
-                                                                                                                        <td>
-                                                                                                                            Price
-                                                                                                                        </td>
                                                                                                                     </tr>
                                                                                                                     </tbody>
                                                                                                                 </table>
-                                                                                                                <hr/>
+                                                                                                                <br/>
                                                                                                                 <table
                                                                                                                     style="width: 100%">
                                                                                                                     <tbody>
-                                                                                                                    @foreach ($data['orderDetail']['order_detail']['order_item'] as $orderItem)
+{{--                                                                                                                    @dd($data);--}}
+                                                                                                                    @foreach ($data['OrderDetail']['order_detail']['order_item'] as $orderItem)
                                                                                                                         <tr>
                                                                                                                             <td style="width: 20%">
                                                                                                                                 <img
@@ -613,7 +615,7 @@
                                                                                                                             </td>
                                                                                                                             <td>
                                                                                                                                 <div
-                                                                                                                                    style="font-size: 13px">{{ $data['orderDetail']['order_detail']['shipment_days'] ?? 'null' }}</div>
+                                                                                                                                    style="font-size: 13px">{{ $data['OrderDetail']['order_detail']['shipment_days'] ?? 'null' }}</div>
                                                                                                                             </td>
                                                                                                                             <td>
                                                                                                                                 <div
@@ -628,7 +630,6 @@
                                                                                                                 </table>
                                                                                                                 <hr/>
                                                                                                             </div>
-
                                                                                                             <table
                                                                                                                 style="width: 100%; font-size: 13px; margin-top: 0.5rem;">
                                                                                                                 <tbody>
@@ -640,7 +641,8 @@
                                                                                                                         </div>
                                                                                                                     </td>
                                                                                                                     <td style="text-align: left;">
-                                                                                                                        ${{ number_format((float) $data['orderDetail']['sub_total'], 2, '.', '') }}</td>
+                                                                                                                        ${{ number_format((float) $data['OrderDetail']['sub_total'], 2, '.', '') }}
+                                                                                                                    </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
                                                                                                                     <td style="width: 40%"></td>
@@ -651,7 +653,8 @@
                                                                                                                         </div>
                                                                                                                     </td>
                                                                                                                     <td style="text-align: left;">
-                                                                                                                        ${{ number_format((float) $data['orderDetail']['shipment_amount'], 2, '.', '') }}</td>
+                                                                                                                        ${{ number_format((float) $data['OrderDetail']['shipment_amount'], 2, '.', '') }}
+                                                                                                                    </td>
                                                                                                                 </tr>
                                                                                                                 <tr>
                                                                                                                     <td style="width: 40%"></td>
@@ -663,37 +666,50 @@
                                                                                                                     </td>
                                                                                                                     <td style="text-align: left;">
                                                                                                                         <div>
-                                                                                                                            <strong>${{ number_format((float) $data['orderDetail']['total_amount'], 2, '.', '') }}</strong>
+                                                                                                                            <strong>${{ number_format((float) $data['OrderDetail']['total_amount'], 2, '.', '') }}</strong>
                                                                                                                         </div>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
-                                                                                                            <table
-                                                                                                                style="width:100%; margin-top: 1.5rem;">
-                                                                                                                <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="padding: 10px; background-color: #EAEDED;">
-                                                                                                                        <strong>Shipping
-                                                                                                                            Address:</strong><br/><br/>
-                                                                                                                        <p style="font-size:13px;">{{ $data['OrderAddress']['address'] }}
-                                                                                                                            <!-- <br/>Area Number and city or Country</p> -->
-                                                                                                                    </td>
-                                                                                                                    <td style="width: 10%"></td>
-                                                                                                                    <td style="padding: 10px; background-color: #EAEDED;">
-                                                                                                                        <strong>Billing
-                                                                                                                            Address:</strong><br/><br/>
-                                                                                                                        <p style="font-size:13px;">
-                                                                                                                            {{ $data['OrderAddress']['address'] }}
-                                                                                                                        </p>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                            <p style="margin-top: 4rem">
-                                                                                                                Hope to
-                                                                                                                see you
-                                                                                                                soon,</p>
+                                                                                                            <hr/>
+                                                                                                            <p style="font-size: 16px; margin: 10px 0px">
+                                                                                                                <strong>Payment
+                                                                                                                    Method</strong>
+                                                                                                            </p>
+                                                                                                            <p style="font-size: 14px">
+                                                                                                                {{ $data['PaymentType'] }}</p>
+                                                                                                            <p style="font-size: 16px; margin-top: 3rem">
+                                                                                                                We will
+                                                                                                                begin
+                                                                                                                processing
+                                                                                                                your
+                                                                                                                order
+                                                                                                                shortly,
+                                                                                                                and you
+                                                                                                                will
+                                                                                                                receive
+                                                                                                                a
+                                                                                                                confirmation
+                                                                                                                email
+                                                                                                                with
+                                                                                                                tracking
+                                                                                                                information
+                                                                                                                once
+                                                                                                                your
+                                                                                                                order
+                                                                                                                has
+                                                                                                                been
+                                                                                                                shipped.</p>
+                                                                                                            <p style="margin-top: 4rem; font-size: 14px">
+                                                                                                                Thank
+                                                                                                                you for
+                                                                                                                shopping
+                                                                                                                with us!
+                                                                                                                We
+                                                                                                                appreciate
+                                                                                                                your
+                                                                                                                business.</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -762,7 +778,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_ad9e64ab20a200b9e4d87c49ca686b6d"
+                                                                                   id="section_d333c95ff13aaff4d2440ce751bc693c"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -842,20 +858,6 @@
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
-{{--                                                                                                                                                    <div>--}}
-{{--                                                                                                                                                        <div--}}
-{{--                                                                                                                                                            data-block-id="6">--}}
-{{--                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"--}}
-{{--                                                                                                                                                               target="_blank"--}}
-{{--                                                                                                                                                               rel="noopener noreferrer"><img--}}
-{{--                                                                                                                                                                    style="max-width:100%"--}}
-{{--                                                                                                                                                                    width="137"--}}
-{{--                                                                                                                                                                    height="53"--}}
-{{--                                                                                                                                                                    alt="Email Marketing Powered by Mailchimp"--}}
-{{--                                                                                                                                                                    title="Mailchimp Email Marketing"--}}
-{{--                                                                                                                                                                    src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>--}}
-{{--                                                                                                                                                        </div>--}}
-{{--                                                                                                                                                    </div>--}}
                                                                                                                                                 </td>
                                                                                                                                             </tr>
                                                                                                                                             </tbody>
@@ -904,7 +906,7 @@
         </tr>
         </tbody>
     </table>
-
-    <br>
-    <br>
 </center>
+<script type="text/javascript" src="/vv5phpjXQuhmvtcdCw/pOEr8kz0zb9Vim/Clx4AQ/B2/pAcwMwGSI"></script>
+</body>
+</html>
