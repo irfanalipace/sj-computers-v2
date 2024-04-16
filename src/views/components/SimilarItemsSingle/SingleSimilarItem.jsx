@@ -122,6 +122,9 @@ const SingleSimilarItem = ({
       {!isMobile ? (
         <>
           <h3>{heading}</h3>
+          <Link
+            to={productPath}
+            style={{ textDecoration: 'none', color: '#007185' }}>
           <div className='similar-item-one-inner'>
             <div className='image-wrapper-similar-items'>
               <LazyLoadImage
@@ -135,9 +138,13 @@ const SingleSimilarItem = ({
               <ProductDetails />
             </div>
           </div>
+          </Link>
         </>
       ) : (
         <Box>
+           <Link
+            to={productPath}
+            style={{ textDecoration: 'none', color: '#007185' }}>
           <Typography
             sx={{ mb: 2 }}
             fontFamily={'Arial'}
@@ -208,6 +215,7 @@ const SingleSimilarItem = ({
               border: 'none',
               borderTop: '2px solid #CDCDCD',
             }}></Box>
+            </Link>
         </Box>
       )}
     </div>

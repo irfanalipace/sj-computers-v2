@@ -350,11 +350,11 @@ function ProductReviews({ productId, productAsin, onFilterChange }) {
               {!isUpSmall && (
                 <div className='mt-1'>
                   <hr />
-                  <p className='mob-rev-see'>
+                  {/* <p className='mob-rev-see'>
                     See More reviews{' '}
                     <ArrowForwardIosIcon sx={{ fontSize: '11px' }} />
                   </p>
-                  <hr />
+                  <hr /> */}
                   <p
                     className='mob-rev-see'
                     onClick={() => navigate(`/add-review/${productAsin}`)}>

@@ -1,0 +1,126 @@
+.customer-review-data {
+  padding: 12px;
+  margin-bottom: 100px;
+}
+/* OrderReview.css */
+
+.custom-rating .MuiRating-icon {
+  margin-right: 8px; /* Adjust the spacing between stars as needed */
+}
+
+.product-container-review {
+  /* padding-left: 344px;
+  padding-right: 300px;
+  padding-top: 40px; */
+  display: flex;
+  justify-content: center;
+  margin-top: 22px;
+}
+.my-review-heading-paragraph {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  text-align: left;
+}
+.product-review-paragraph {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  text-align: left;
+}
+
+.my-review-heading {
+  font-family: Inter;
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 33.89px;
+  text-align: left;
+}
+
+.customer-review-data h5 {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.52px;
+  text-align: left;
+  color: #318243;
+}
+.container-review-inside-data {
+  margin-top: 31px;
+  margin-bottom: 24px;
+  border: 1px solid #dddddd;
+  width: 884px;
+  /* height: 309px; */
+  gap: 0px;
+  /* border-radius: 8px 0px 0px 0px; */
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  padding: 28px;
+}
+.customer-review-data span {
+  font-family: Inter;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 16.94px;
+  text-align: center;
+}
+.ratind-dev-sections {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.product-review-text-area-rating-review-list textarea {
+  font-family: Inter;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 14.52px;
+  letter-spacing: -0.01em;
+  text-align: left;
+  width: 667px;
+  height: 110px;
+  padding: 10px;
+  border-radius: 10px 0px 0px 0px;
+  border: 1px solid #dddddd;
+}
+.submit-review-button button {
+  width: 240px;
+  height: 39px;
+  top: 1287px;
+  left: 600px;
+  gap: 0px;
+  opacity: 0px;
+  background: #318243;
+  color: white;
+  border: 1px solid #318243;
+  border-radius: 8px;
+}
+.submit-review-button {
+  text-align: center;
+}
+@media screen and (max-width: 600px) {
+  .product-container-review {
+    display: flow-root;
+    justify-content: center;
+    margin-top: 22px;
+  }
+  .desktop-view {
+    display: none;
+  }
+
+  .product-review-text-area-rating-review-list textarea {
+    width: 310px;
+  }
+  .customer-review-data {
+    padding: 7px;
+  }
+  .my-review-heading {
+    font-size: 18px;
+  }
+  .my-review-heading-paragraph {
+    font-size: 12px;
+  }
+  .container-review-inside-data {
+    width: auto;
+  }
+}
