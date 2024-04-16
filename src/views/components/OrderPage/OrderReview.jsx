@@ -98,7 +98,10 @@ function OrderReview() {
           </div>
         </div>
       </div>
+      <div className='desktop-view'>
       <RecommandSectionsProducts />
+      </div>
+     
     </>
   );
 }

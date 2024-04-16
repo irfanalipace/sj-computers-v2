@@ -104,6 +104,8 @@ text-align: center;
     display: flow-root;
     justify-content: center;
     margin-top: 22px;
+  }.desktop-view{
+    display: none;
   }
 
   .product-review-text-area-rating-review-list textarea {
