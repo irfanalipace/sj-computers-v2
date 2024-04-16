@@ -403,30 +403,30 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "y32l2haxyekygzqt2jjq-f-41c56017f-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "w27vmzaxhdqiozq5ameq-f-47011bbf2-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
                             "ak.ai": parseInt("963350", 10),
                             "ak.ol": "0",
-                            "ak.cr": 1,
+                            "ak.cr": 158,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "378f021",
-                            "ak.r": 45582,
+                            "ak.rid": "68da0425",
+                            "ak.r": 46013,
                             "ak.a2": e,
                             "ak.m": "x",
                             "ak.n": "essl",
-                            "ak.bpcip": "198.244.189.0",
-                            "ak.cport": 24717,
-                            "ak.gh": "88.221.75.95",
+                            "ak.bpcip": "182.191.86.0",
+                            "ak.cport": 54059,
+                            "ak.gh": "2.16.152.96",
                             "ak.quicv": "",
                             "ak.tlsv": "tls1.3",
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712575059",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==L5ecBVUO3OS4OSXD8NU+RyalddlJCLkzPIcZdKe/zNbHkb5Ts3+2aHSMmZgBe4TYXRycZ3aQizaqy/gJ4cw3hzs0ZQJ/5ghDS7TbiB8T4lPaYLi9+2PAyFhxMidtA4OtbE9lIL2qEz8ccqk+aONHvop0HUy1ghkC4FnlcszJ4gcav+jwKJ5KD1JOHhhghDjkGUXL1WZnRoPIb27Mzi/vcQTjqx2c6WEqbu64JGDsseTRvSm+KvjLN7V9IYcZEVh1s6MqdbWz1Uzm/b4Q/O4U7U9YoEqd+wx1FwPA328QbPxzOox4wIb5YuKFxnRBveEYJoRxQdDoozzNy4Qbx8M1X7odHMeEAGNEr8mBL9aZjlYvBdiK5taDTWbthttkiiPlmNxzMgZ9FoGwlkG+lm2tnZMxSB570KD8tZ0T1IKTUvs=",
+                            "ak.t": "1713177353",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==UkMKXCIGBD/L/p2BSzlrOT87mXK6rnFdyk7kPYC5zEuEzybtBkbnx8Q7h8UacUFkB80ejo0i2WAkc3pr7d4OUEIQaICwFlyXqRYcFDtlP8vSxRhX0/v4FkrPyJz1TEMgw3LamFzWM2JD0mCQvy1XstykRiEcq2Wyj8BsXKMn1rXtG6tyMCZ6aUSjgsMMdm3mNzwGPYhxysfxNm5+zz2r0yCLHhLUy8B0kPN5uf5+rE9lKlSw9rLnBTkKZgoN4th/JR1htjGSozxUjZSbzasJWKHAd+5YFcko7gVrJsJPlbomF7kfcFR6l1VuhdT+866oQMJ29e1/oqmGrXG+xI/15J7zfPcUYS3Q+Q9hXEgp1VIe/9eXkydywNGIfoPaNWS+chfJfyUSPfd7nApzavZhPAr8dXtebJzwuOUl+H4MQtU=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -503,7 +503,7 @@
                                                                             <div data-block-id="11" class="mceCode">
                                                                                 <title>Document</title>
                                                                                 <div
-                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color: #00305E; padding: 4rem 0px; height: 100%;">
+                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E;  padding: 4rem 0px; height: 100%;">
                                                                                     <table>
                                                                                         <tbody>
                                                                                         <tr>
@@ -517,78 +517,63 @@
                                                                                                             style="width: 100% ;height: 20%; min-height: 100px;"/>
                                                                                                     </div>
                                                                                                     <div
-                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
+                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; border: 1px solid #eee">
                                                                                                         <div
                                                                                                             style="padding: 2rem 2rem">
-                                                                                                            <h1 style="margin: 0; font-size: 22px">
-                                                                                                                Password
-                                                                                                                Reset!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 25px 0px 14px 0px">
-                                                                                                                Hi
-                                                                                                                {{ $name }}</h2>
-                                                                                                            <p style="font-size: 14px">
-                                                                                                                We
-                                                                                                                received
-                                                                                                                a
-                                                                                                                request
-                                                                                                                to reset
-                                                                                                                the
-                                                                                                                password
-                                                                                                                for your
-                                                                                                                SJ
-                                                                                                                Computers
-                                                                                                                account.
-                                                                                                                If you
-                                                                                                                initiated
-                                                                                                                this
-                                                                                                                request,
-                                                                                                                please
-                                                                                                                use the
-                                                                                                                following
-                                                                                                                link to
-                                                                                                                set a
-                                                                                                                new
-                                                                                                                password:</p>
-                                                                                                            <table
-                                                                                                                width="100%">
+                                                                                                            <table>
                                                                                                                 <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
+                                                                                                                    <td style="width: 60%">
+                                                                                                                        <h1 style="margin: 0; font-size: 22px">
+                                                                                                                            Order
+                                                                                                                            Cancelled!</h1>
                                                                                                                     </td>
-                                                                                                                    <td style="width: 70%">
-                                                                                                                        <div
-                                                                                                                            style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                            <a href="{{ $actionUrl }}"
-                                                                                                                               style="color: #fff; text-decoration: none; cursor: pointer">RESET
-                                                                                                                                YOUR
-                                                                                                                                PASSWORD</a>
-                                                                                                                        </div>
+                                                                                                                    <td style="width: 10%">
                                                                                                                     </td>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
+                                                                                                                    <td style="width: 30%">
+                                                                                                                        <p style="margin: 0; font-size: 14px">
+                                                                                                                            Order
+                                                                                                                            No:
+                                                                                                                            <strong>#12345</strong>
+                                                                                                                        </p>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
-                                                                                                            <p>If you
-                                                                                                                did not
-                                                                                                                request
-                                                                                                                a
-                                                                                                                password
-                                                                                                                reset,
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
+                                                                                                                Hi
+                                                                                                                {{ $data->user->name }}</h2>
+                                                                                                            <p style="font-size: 14px">
+                                                                                                                We hope
+                                                                                                                this
+                                                                                                                message
+                                                                                                                finds
+                                                                                                                you
+                                                                                                                well. We
+                                                                                                                regret
+                                                                                                                to
+                                                                                                                inform
+                                                                                                                you that
+                                                                                                                your
+                                                                                                                order
+                                                                                                                #{{ $data['id'] }}
+                                                                                                                has been
+                                                                                                                cancelled
+                                                                                                                .</p>
+                                                                                                            <p style="font-size: 14px; margin-top: 20px">
+                                                                                                                If you
+                                                                                                                want to
+                                                                                                                know the
+                                                                                                                reason
+                                                                                                                behind
+                                                                                                                cancellation,
                                                                                                                 please
-                                                                                                                contact
-                                                                                                                our
-                                                                                                                support
-                                                                                                                team
-                                                                                                                immediately
-                                                                                                                at <span
-                                                                                                                    style="color: #0a8ce9">[support@sjcomputers.us]</span>.
-                                                                                                            </p>
+                                                                                                                call us
+                                                                                                                at
+                                                                                                                952-452-8884</p>
                                                                                                             <p style="margin-top: 4rem">
-                                                                                                                Thank
-                                                                                                                you!</p>
+                                                                                                                Best
+                                                                                                                Regards,</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -657,7 +642,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_58574171cdf60a56b30f27dc2b947b48"
+                                                                                   id="section_aced0969cd3d2af4569662ad2b49692a"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -737,6 +722,20 @@
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
+                                                                                                                                                    <div>
+{{--                                                                                                                                                        <div--}}
+{{--                                                                                                                                                            data-block-id="6">--}}
+{{--                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"--}}
+{{--                                                                                                                                                               target="_blank"--}}
+{{--                                                                                                                                                               rel="noopener noreferrer"><img--}}
+{{--                                                                                                                                                                    style="max-width:100%"--}}
+{{--                                                                                                                                                                    width="137"--}}
+{{--                                                                                                                                                                    height="53"--}}
+{{--                                                                                                                                                                    alt="Email Marketing Powered by Mailchimp"--}}
+{{--                                                                                                                                                                    title="Mailchimp Email Marketing"--}}
+{{--                                                                                                                                                                    src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>--}}
+{{--                                                                                                                                                        </div>--}}
+                                                                                                                                                    </div>
                                                                                                                                                 </td>
                                                                                                                                             </tr>
                                                                                                                                             </tbody>
@@ -786,6 +785,6 @@
         </tbody>
     </table>
 </center>
-<script type="text/javascript" src="/ZlvJ94/4G7h/d-/4c-7/UKC1yHmZHiw/mOi9JrXDrL1E/M35adQZpAw/cX/56CH13dhY"></script>
+<script type="text/javascript" src="/vv5phpjXQuhmvtcdCw/pOEr8kz0zb9Vim/Clx4AQ/B2/pAcwMwGSI"></script>
 </body>
 </html>

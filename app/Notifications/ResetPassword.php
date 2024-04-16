@@ -2,9 +2,22 @@
 namespace App\Notifications;
 
 use Illuminate\Auth\Notifications\ResetPassword as BaseResetPassword;
+use Illuminate\Notifications\Messages\MailMessage;
 
 class ResetPassword extends BaseResetPassword
 {
+    public function toMail($notifiable)
+    {
+        $url = $this->resetUrl($notifiable);
+        $name = $notifiable->name;
+
+        return (new MailMessage())
+            ->subject('Reset Password')
+            ->view('auth.reset_password', [
+                'actionUrl' => $url,
+                'name' => $name
+            ]);
+    }
     protected function resetUrl($notifiable)
     {
 

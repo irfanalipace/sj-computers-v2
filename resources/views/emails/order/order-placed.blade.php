@@ -403,30 +403,30 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "y32l2haxyekygzqt2jjq-f-41c56017f-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "w27vmzaxhdqiozq5au3a-f-2a0a75c98-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
                             "ak.ai": parseInt("963350", 10),
                             "ak.ol": "0",
-                            "ak.cr": 1,
+                            "ak.cr": 148,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "378f021",
-                            "ak.r": 45582,
+                            "ak.rid": "68e543f1",
+                            "ak.r": 46013,
                             "ak.a2": e,
                             "ak.m": "x",
                             "ak.n": "essl",
-                            "ak.bpcip": "198.244.189.0",
-                            "ak.cport": 24717,
-                            "ak.gh": "88.221.75.95",
+                            "ak.bpcip": "182.191.86.0",
+                            "ak.cport": 54222,
+                            "ak.gh": "2.16.152.96",
                             "ak.quicv": "",
                             "ak.tlsv": "tls1.3",
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712575059",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==L5ecBVUO3OS4OSXD8NU+RyalddlJCLkzPIcZdKe/zNbHkb5Ts3+2aHSMmZgBe4TYXRycZ3aQizaqy/gJ4cw3hzs0ZQJ/5ghDS7TbiB8T4lPaYLi9+2PAyFhxMidtA4OtbE9lIL2qEz8ccqk+aONHvop0HUy1ghkC4FnlcszJ4gcav+jwKJ5KD1JOHhhghDjkGUXL1WZnRoPIb27Mzi/vcQTjqx2c6WEqbu64JGDsseTRvSm+KvjLN7V9IYcZEVh1s6MqdbWz1Uzm/b4Q/O4U7U9YoEqd+wx1FwPA328QbPxzOox4wIb5YuKFxnRBveEYJoRxQdDoozzNy4Qbx8M1X7odHMeEAGNEr8mBL9aZjlYvBdiK5taDTWbthttkiiPlmNxzMgZ9FoGwlkG+lm2tnZMxSB570KD8tZ0T1IKTUvs=",
+                            "ak.t": "1713177910",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==PAExq1x0X8/7oN77AegdNw2M4bZ0PsnOa5xLXUMpyw6H3eAmxgiQ2EQyj9SwLEilD+F8qbgDauoGgQgKD76DZ2qKqFS847L416rrQEIXdlzcSTfvAsC/927J6fCnz9k3nCtVdKC4ttMuyoxWGvFUwjPJFytEKoQt8M2a6/SK9n0KB3KCKWk9B47+jkzCND9ajyQRU4jiboQPTOCeg8a1MlGDuB+0hF5nscLlJbyl+mAxtfYi8Sqo1bZghVJO83ki+RW/U4C2g44syJ3RtBZ7Le8xOKipaNtU28ty1+t3p6vAItunQG7BIvNBcLQG9LUV9FJdJI2BXtRGqjxtv/8oAEjM/knAqejnjm/U/6bEAErHlMv3Wv6jVxZA9qHX0VSxCmPipZBtmeXSK5eWWS36g1M68C+Hndw2WhQid+vBTMU=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -503,7 +503,7 @@
                                                                             <div data-block-id="11" class="mceCode">
                                                                                 <title>Document</title>
                                                                                 <div
-                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color: #00305E; padding: 4rem 0px; height: 100%;">
+                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E; padding: 4rem 0px; height: 100%;">
                                                                                     <table>
                                                                                         <tbody>
                                                                                         <tr>
@@ -517,78 +517,199 @@
                                                                                                             style="width: 100% ;height: 20%; min-height: 100px;"/>
                                                                                                     </div>
                                                                                                     <div
-                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
+                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; border: 1px solid #eee">
                                                                                                         <div
                                                                                                             style="padding: 2rem 2rem">
-                                                                                                            <h1 style="margin: 0; font-size: 22px">
-                                                                                                                Password
-                                                                                                                Reset!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 25px 0px 14px 0px">
-                                                                                                                Hi
-                                                                                                                {{ $name }}</h2>
-                                                                                                            <p style="font-size: 14px">
-                                                                                                                We
-                                                                                                                received
-                                                                                                                a
-                                                                                                                request
-                                                                                                                to reset
-                                                                                                                the
-                                                                                                                password
-                                                                                                                for your
-                                                                                                                SJ
-                                                                                                                Computers
-                                                                                                                account.
-                                                                                                                If you
-                                                                                                                initiated
-                                                                                                                this
-                                                                                                                request,
-                                                                                                                please
-                                                                                                                use the
-                                                                                                                following
-                                                                                                                link to
-                                                                                                                set a
-                                                                                                                new
-                                                                                                                password:</p>
-                                                                                                            <table
-                                                                                                                width="100%">
+                                                                                                            <table>
                                                                                                                 <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
+                                                                                                                    <td style="width: 50%">
+                                                                                                                        <h1 style="margin: 0; font-size: 22px">
+                                                                                                                            Your
+                                                                                                                            Order
+                                                                                                                            Placed
+                                                                                                                            Successfully!</h1>
                                                                                                                     </td>
-                                                                                                                    <td style="width: 70%">
-                                                                                                                        <div
-                                                                                                                            style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                            <a href="{{ $actionUrl }}"
-                                                                                                                               style="color: #fff; text-decoration: none; cursor: pointer">RESET
-                                                                                                                                YOUR
-                                                                                                                                PASSWORD</a>
-                                                                                                                        </div>
+                                                                                                                    <td style="width: 10%">
                                                                                                                     </td>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
+                                                                                                                    <td style="width: 40%">
+                                                                                                                        <p style="margin: 0; font-size: 14px">
+                                                                                                                            Order
+                                                                                                                            No:
+                                                                                                                            <strong>#{{ $data['OrderDetail']['order_detail']['id'] ?? ''}}</strong>
+                                                                                                                        </p>
                                                                                                                     </td>
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
-                                                                                                            <p>If you
-                                                                                                                did not
-                                                                                                                request
-                                                                                                                a
-                                                                                                                password
-                                                                                                                reset,
-                                                                                                                please
-                                                                                                                contact
-                                                                                                                our
-                                                                                                                support
-                                                                                                                team
-                                                                                                                immediately
-                                                                                                                at <span
-                                                                                                                    style="color: #0a8ce9">[support@sjcomputers.us]</span>.
-                                                                                                            </p>
-                                                                                                            <p style="margin-top: 4rem">
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
+                                                                                                                Hi
+                                                                                                                {{ $data['userInfo']['name'] ?? 'Admin' }}
+                                                                                                            </h2>
+                                                                                                            <p style="font-size: 14px">
                                                                                                                 Thank
-                                                                                                                you!</p>
+                                                                                                                you for
+                                                                                                                choosing
+                                                                                                                SJ
+                                                                                                                Computers
+                                                                                                                for your
+                                                                                                                shopping
+                                                                                                                needs.
+                                                                                                                We
+                                                                                                                are
+                                                                                                                delighted
+                                                                                                                to
+                                                                                                                inform
+                                                                                                                you that
+                                                                                                                your
+                                                                                                                order
+                                                                                                                has been
+                                                                                                                successfully
+                                                                                                                placed.
+                                                                                                                Below
+                                                                                                                are the
+                                                                                                                details
+                                                                                                                of your
+                                                                                                                order: </p>
+                                                                                                            <div
+                                                                                                                style="margin: 3rem 0 0 0; padding: 1re">
+                                                                                                                <hr/>
+                                                                                                                <table
+                                                                                                                    style="width: 100%; font-size: 13px;">
+                                                                                                                    <tbody>
+                                                                                                                    <tr>
+                                                                                                                        <td style="width: 60%;">
+                                                                                                                            Order
+                                                                                                                            Details
+                                                                                                                        </td>
+                                                                                                                    </tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                                <br/>
+                                                                                                                <table
+                                                                                                                    style="width: 100%">
+                                                                                                                    <tbody>
+{{--                                                                                                                    @dd($data);--}}
+                                                                                                                    @foreach ($data['OrderDetail']['order_detail']['order_item'] as $orderItem)
+                                                                                                                        <tr>
+                                                                                                                            <td style="width: 20%">
+                                                                                                                                <img
+                                                                                                                                    src="{{ $orderItem['product']['image'][0] ?? '' }}"
+                                                                                                                                    style="width: 60%; object-fit: contain"/>
+                                                                                                                            </td>
+                                                                                                                            <td style="width: 40%">
+                                                                                                                                <div style="margin: 10px">
+                                                                                                                                    <p style="font-size: 14px">
+                                                                                                                                        <strong>
+                                                                                                                                                <?php
+                                                                                                                                                $name = isset($orderItem['product_name']) ? $orderItem['product_name'] : 'null';
+                                                                                                                                                $words = explode(' ', $name);
+                                                                                                                                                $shortenedName = implode(' ', array_slice($words, 0, 3));
+                                                                                                                                                if (count($words) > 3) {
+                                                                                                                                                    $shortenedName .= '...';
+                                                                                                                                                }
+                                                                                                                                                echo $shortenedName;
+                                                                                                                                                ?>
+                                                                                                                                        </strong></p>
+                                                                                                                                </div>
+                                                                                                                            </td>
+                                                                                                                            <td>
+                                                                                                                                <div
+                                                                                                                                    style="font-size: 13px">{{ $data['OrderDetail']['order_detail']['shipment_days'] ?? 'null' }}</div>
+                                                                                                                            </td>
+                                                                                                                            <td>
+                                                                                                                                <div
+                                                                                                                                    style="font-size: 13px">
+                                                                                                                                    <strong>${{ number_format((float) $orderItem['price'], 2) }}</strong>
+                                                                                                                                </div>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                    @endforeach
+                                                                                                                    <tr></tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                                <hr/>
+                                                                                                            </div>
+                                                                                                            <table
+                                                                                                                style="width: 100%; font-size: 13px; margin-top: 0.5rem;">
+                                                                                                                <tbody>
+                                                                                                                <tr>
+                                                                                                                    <td style="width: 40%"></td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        <div>
+                                                                                                                            Total:
+                                                                                                                        </div>
+                                                                                                                    </td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        ${{ number_format((float) $data['OrderDetail']['sub_total'], 2, '.', '') }}
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td style="width: 40%"></td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        <div>
+                                                                                                                            Shipping
+                                                                                                                            Charges:
+                                                                                                                        </div>
+                                                                                                                    </td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        ${{ number_format((float) $data['OrderDetail']['shipment_amount'], 2, '.', '') }}
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                <tr>
+                                                                                                                    <td style="width: 40%"></td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        <div>
+                                                                                                                            <strong>Grand
+                                                                                                                                Total:</strong>
+                                                                                                                        </div>
+                                                                                                                    </td>
+                                                                                                                    <td style="text-align: left;">
+                                                                                                                        <div>
+                                                                                                                            <strong>${{ number_format((float) $data['OrderDetail']['total_amount'], 2, '.', '') }}</strong>
+                                                                                                                        </div>
+                                                                                                                    </td>
+                                                                                                                </tr>
+                                                                                                                </tbody>
+                                                                                                            </table>
+                                                                                                            <hr/>
+                                                                                                            <p style="font-size: 16px; margin: 10px 0px">
+                                                                                                                <strong>Payment
+                                                                                                                    Method</strong>
+                                                                                                            </p>
+                                                                                                            <p style="font-size: 14px">
+                                                                                                                {{ $data['PaymentType'] }}</p>
+                                                                                                            <p style="font-size: 16px; margin-top: 3rem">
+                                                                                                                We will
+                                                                                                                begin
+                                                                                                                processing
+                                                                                                                your
+                                                                                                                order
+                                                                                                                shortly,
+                                                                                                                and you
+                                                                                                                will
+                                                                                                                receive
+                                                                                                                a
+                                                                                                                confirmation
+                                                                                                                email
+                                                                                                                with
+                                                                                                                tracking
+                                                                                                                information
+                                                                                                                once
+                                                                                                                your
+                                                                                                                order
+                                                                                                                has
+                                                                                                                been
+                                                                                                                shipped.</p>
+                                                                                                            <p style="margin-top: 4rem; font-size: 14px">
+                                                                                                                Thank
+                                                                                                                you for
+                                                                                                                shopping
+                                                                                                                with us!
+                                                                                                                We
+                                                                                                                appreciate
+                                                                                                                your
+                                                                                                                business.</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -657,7 +778,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_58574171cdf60a56b30f27dc2b947b48"
+                                                                                   id="section_d333c95ff13aaff4d2440ce751bc693c"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -786,6 +907,6 @@
         </tbody>
     </table>
 </center>
-<script type="text/javascript" src="/ZlvJ94/4G7h/d-/4c-7/UKC1yHmZHiw/mOi9JrXDrL1E/M35adQZpAw/cX/56CH13dhY"></script>
+<script type="text/javascript" src="/vv5phpjXQuhmvtcdCw/pOEr8kz0zb9Vim/Clx4AQ/B2/pAcwMwGSI"></script>
 </body>
 </html>

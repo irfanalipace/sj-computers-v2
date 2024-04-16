@@ -403,7 +403,7 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "y32l2haxyekygzqt2jjq-f-41c56017f-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "y32l2haxyekygzqt2j5q-f-be70ebfbf-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
@@ -412,7 +412,7 @@
                             "ak.cr": 1,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "378f021",
+                            "ak.rid": "37b5005",
                             "ak.r": 45582,
                             "ak.a2": e,
                             "ak.m": "x",
@@ -425,8 +425,8 @@
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712575059",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==L5ecBVUO3OS4OSXD8NU+RyalddlJCLkzPIcZdKe/zNbHkb5Ts3+2aHSMmZgBe4TYXRycZ3aQizaqy/gJ4cw3hzs0ZQJ/5ghDS7TbiB8T4lPaYLi9+2PAyFhxMidtA4OtbE9lIL2qEz8ccqk+aONHvop0HUy1ghkC4FnlcszJ4gcav+jwKJ5KD1JOHhhghDjkGUXL1WZnRoPIb27Mzi/vcQTjqx2c6WEqbu64JGDsseTRvSm+KvjLN7V9IYcZEVh1s6MqdbWz1Uzm/b4Q/O4U7U9YoEqd+wx1FwPA328QbPxzOox4wIb5YuKFxnRBveEYJoRxQdDoozzNy4Qbx8M1X7odHMeEAGNEr8mBL9aZjlYvBdiK5taDTWbthttkiiPlmNxzMgZ9FoGwlkG+lm2tnZMxSB570KD8tZ0T1IKTUvs=",
+                            "ak.t": "1712575099",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==DuzXva0wyYrA/+QLq3pEfE8K6RuLLlENVEpMYnkTWQRTtSEhUTbgQstKkqvhVjhJkMbmhERZuvMB0SOYvdGetWtTlayDIQ7YlmhEquITXj6aAEAw77TMMOrLc9VjIR8TRqJyOcLI4Y7V5JuVI9IGsrQB11uc+ehzLp6VuvcAvcxlAgl/WQ1EjmVDB9adWsfVy+W/KewxhLyd1TpnbVaZlJCrGAHpDq9ud3JDQCTT3IRE0/0indwyCDjedZbfGIssiI8lE+EV7ECv1u/2coA5UKTuCVCZjVabqPdpEdk3Gw2vyLYGZO2Bb/Ponmi3p5ohB5+G2jDFidUEkB9cTtW1fNSY7/1u7cKtfyXrGL/vYdVKHjVPBHldDNV3s1rdofwOpDoNcYueKxwcAeEvYTiANIfOXQnUswHpePLS98Wv24Q=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -517,78 +517,54 @@
                                                                                                             style="width: 100% ;height: 20%; min-height: 100px;"/>
                                                                                                     </div>
                                                                                                     <div
-                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
+                                                                                                        style="background-color: #fff; display: block; margin: 0px auto;  border: 1px solid #eee">
                                                                                                         <div
                                                                                                             style="padding: 2rem 2rem">
                                                                                                             <h1 style="margin: 0; font-size: 22px">
-                                                                                                                Password
-                                                                                                                Reset!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 25px 0px 14px 0px">
+                                                                                                                Information
+                                                                                                                Updated
+                                                                                                                Successfully!</h1>
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
                                                                                                                 Hi
                                                                                                                 {{ $name }}</h2>
                                                                                                             <p style="font-size: 14px">
-                                                                                                                We
-                                                                                                                received
-                                                                                                                a
-                                                                                                                request
-                                                                                                                to reset
-                                                                                                                the
-                                                                                                                password
-                                                                                                                for your
-                                                                                                                SJ
+                                                                                                                This is
+                                                                                                                to
+                                                                                                                confirm
+                                                                                                                that
+                                                                                                                your SJ
                                                                                                                 Computers
-                                                                                                                account.
+                                                                                                                account
+                                                                                                                information
+                                                                                                                has
+                                                                                                                been
+                                                                                                                updated
+                                                                                                                successfully.
                                                                                                                 If you
-                                                                                                                initiated
-                                                                                                                this
-                                                                                                                request,
-                                                                                                                please
-                                                                                                                use the
-                                                                                                                following
-                                                                                                                link to
-                                                                                                                set a
-                                                                                                                new
-                                                                                                                password:</p>
-                                                                                                            <table
-                                                                                                                width="100%">
-                                                                                                                <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
-                                                                                                                    </td>
-                                                                                                                    <td style="width: 70%">
-                                                                                                                        <div
-                                                                                                                            style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                            <a href="{{ $actionUrl }}"
-                                                                                                                               style="color: #fff; text-decoration: none; cursor: pointer">RESET
-                                                                                                                                YOUR
-                                                                                                                                PASSWORD</a>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                            <p>If you
+                                                                                                                made any
+                                                                                                                changes
+                                                                                                                recently
+                                                                                                                and
                                                                                                                 did not
-                                                                                                                request
-                                                                                                                a
-                                                                                                                password
-                                                                                                                reset,
+                                                                                                                authorize
+                                                                                                                them,
                                                                                                                 please
                                                                                                                 contact
-                                                                                                                our
-                                                                                                                support
-                                                                                                                team
+                                                                                                                us
                                                                                                                 immediately
-                                                                                                                at <span
-                                                                                                                    style="color: #0a8ce9">[support@sjcomputers.us]</span>.
+                                                                                                                at
+                                                                                                                <span
+                                                                                                                    style="color:#0a8ce9">[support@sjcomputers.us]</span>.
                                                                                                             </p>
-                                                                                                            <p style="margin-top: 4rem">
+                                                                                                            <p style="font-size: 14px; margin-top: 4rem">
                                                                                                                 Thank
-                                                                                                                you!</p>
+                                                                                                                you for
+                                                                                                                choosing
+                                                                                                                SJ
+                                                                                                                Computers!</p>
+                                                                                                            <p style="margin-top: 4rem">
+                                                                                                                Best
+                                                                                                                Regards,</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -657,7 +633,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_58574171cdf60a56b30f27dc2b947b48"
+                                                                                   id="section_4913ab9259f6329468073abba4dd859d"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">

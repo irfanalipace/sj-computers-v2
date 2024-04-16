@@ -649,20 +649,6 @@
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
-                                                                                                                                                    <div>
-                                                                                                                                                        <div
-                                                                                                                                                            data-block-id="6">
-                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"
-                                                                                                                                                               target="_blank"
-                                                                                                                                                               rel="noopener noreferrer"><img
-                                                                                                                                                                    style="max-width:100%"
-                                                                                                                                                                    width="137"
-                                                                                                                                                                    height="53"
-                                                                                                                                                                    alt="Email Marketing Powered by Mailchimp"
-                                                                                                                                                                    title="Mailchimp Email Marketing"
-                                                                                                                                                                    src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>
-                                                                                                                                                        </div>
-                                                                                                                                                    </div>
                                                                                                                                                 </td>
                                                                                                                                             </tr>
                                                                                                                                             </tbody>

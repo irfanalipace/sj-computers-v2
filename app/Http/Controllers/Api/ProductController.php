@@ -181,10 +181,10 @@ class ProductController extends BaseController
             $listArr = [];
 
             foreach ($units as $unit) {
-                $data = $this->getLeastHighestValue($key, $unit, $sql);
+                $listArr = array_merge($listArr, $this->getLeastHighestValue($key, $unit, $sql));
 
-                $listArr['least_' . $unit] = $data['least_' . $unit];
-                $listArr['highest_' . $unit] = $data['highest_' . $unit];
+                // $listArr['least_' . $unit] = $data['least_' . $unit];
+                // $listArr['highest_' . $unit] = $data['highest_' . $unit];
 
             }
 
@@ -251,68 +251,62 @@ class ProductController extends BaseController
     public function getLeastHighestValue($key, $unit, $sql = [])
     {
         $conversionFactors = ['MB' => 1, 'GB' => 1024, 'TB' => 1048576]; // Conversion factors
-
-        // if(!empty($sql)) {
-
+        $uniqueValues = [];
+    
+        // if (!empty($sql)) {
         //     $records = $sql->whereHas('productInfo', function ($query) use ($key) {
         //         $query->where('key', $key)
-        //               ->where(function($query) {
-        //                   $query->where('value', 'LIKE', '% MB')
-        //                         ->orWhere('value', 'LIKE', '% GB')
-        //                         ->orWhere('value', 'LIKE', '% TB');
-        //               });
+        //             ->where(function ($query) {
+        //                 $query->where('value', 'LIKE', '% MB')
+        //                     ->orWhere('value', 'LIKE', '% GB')
+        //                     ->orWhere('value', 'LIKE', '% TB');
+        //             });
         //     })
         //     ->with(['productInfo' => function ($query) use ($key) {
         //         $query->where('key', $key)
-        //               ->where(function($query) {
-        //                   $query->where('value', 'LIKE', '% MB')
-        //                         ->orWhere('value', 'LIKE', '% GB')
-        //                         ->orWhere('value', 'LIKE', '% TB');
-        //               })
-        //               ->select('product_id', 'value');
-        //     }])
-        //     ->get();
-
-        //     $values = $records->pluck('productInfo')->flatten()->map(function ($item) use ($conversionFactors) {
-        //         // Extract the numeric part and unit from the value string
-        //         preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
-
-        //         $numericValue = $matches[1];
-        //         $valueUnit = strtoupper($matches[3]);
-        //         // dd($numericValue );
-        //         // Convert the value to MB for a uniform comparison
-        //         return $numericValue * $conversionFactors[$valueUnit];
-        //     });
-
-        // } else{
-
-
-        $records = DB::table('product_infos')
-            ->where('key', $key)
-            ->where('value', 'LIKE', '%' . $unit . '%')
-            ->select('value')
-            ->get();
-
-        $values = $records->map(function ($item) use ($conversionFactors) {
+        //             ->where(function ($query) {
+        //                 $query->where('value', 'LIKE', '% MB')
+        //                     ->orWhere('value', 'LIKE', '% GB')
+        //                     ->orWhere('value', 'LIKE', '% TB');
+        //             })
+        //             ->select('product_id', 'value');
+        //     }])->get();
+           
+        //     // dd($records->paginate(5));
+        // } else {
+            $records = DB::table('product_infos')
+                ->where('key', $key)
+                ->where('value', 'LIKE', '%' . $unit . '%')
+                ->select('value')
+                ->get();
+        // }
+    
+        $values = $records->map(function ($item) use ($conversionFactors, &$uniqueValues) {
             // Extract the numeric part and unit from the value string
             preg_match('/(\d+(\.\d+)?)\s*(MB|GB|TB)/i', $item->value, $matches);
-            $numericValue = $matches[1];
-            $valueUnit = strtoupper($matches[3]);
-
-            // Convert the value to MB for a uniform comparison
-            return $numericValue * $conversionFactors[$valueUnit];
+           
+            // Check if the regular expression matched
+            if (isset($matches[1]) && isset($matches[3])) {
+                $numericValue = $matches[1];
+                $valueUnit = strtoupper($matches[3]);
+    
+                // Convert the value to MB for a uniform comparison
+                $backendValue = $numericValue * $conversionFactors[$valueUnit] . ' ' . $valueUnit;
+    
+                // Check if the value already exists in the uniqueValues array
+                if (!isset($uniqueValues[$backendValue])) {
+                    $uniqueValues[$backendValue] = [
+                        'value' => $item->value,
+                        'backend_value' => $item->value,
+                    ];
+                }
+            }
+            
+            return null; // We don't need to return anything here, as we're populating $uniqueValues array
         });
-
-        // Assuming you want to find the min/max in MB and then convert to the target unit for display
-        $least = $values->min() / ($conversionFactors[$unit] ?: 1);
-        $highest = $values->max() / ($conversionFactors[$unit] ?: 1);
-
-        return [
-            'least_' . $unit => round($least, 2), // Round to 2 decimal places for cleanliness
-            'highest_' . $unit => round($highest, 2),
-        ];
+    
+        return array_values($uniqueValues);
     }
-
 
     protected function getBrands($key, $sql = [])
     {

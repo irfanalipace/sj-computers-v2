@@ -403,7 +403,7 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "y32l2haxyekygzqt2jjq-f-41c56017f-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "y32l2haxyekygzqt2jra-f-e4b2dacea-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
@@ -412,7 +412,7 @@
                             "ak.cr": 1,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "378f021",
+                            "ak.rid": "379d8a6",
                             "ak.r": 45582,
                             "ak.a2": e,
                             "ak.m": "x",
@@ -425,8 +425,8 @@
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712575059",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==L5ecBVUO3OS4OSXD8NU+RyalddlJCLkzPIcZdKe/zNbHkb5Ts3+2aHSMmZgBe4TYXRycZ3aQizaqy/gJ4cw3hzs0ZQJ/5ghDS7TbiB8T4lPaYLi9+2PAyFhxMidtA4OtbE9lIL2qEz8ccqk+aONHvop0HUy1ghkC4FnlcszJ4gcav+jwKJ5KD1JOHhhghDjkGUXL1WZnRoPIb27Mzi/vcQTjqx2c6WEqbu64JGDsseTRvSm+KvjLN7V9IYcZEVh1s6MqdbWz1Uzm/b4Q/O4U7U9YoEqd+wx1FwPA328QbPxzOox4wIb5YuKFxnRBveEYJoRxQdDoozzNy4Qbx8M1X7odHMeEAGNEr8mBL9aZjlYvBdiK5taDTWbthttkiiPlmNxzMgZ9FoGwlkG+lm2tnZMxSB570KD8tZ0T1IKTUvs=",
+                            "ak.t": "1712575074",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==LrTwWYtes/c5jxEw/rpVTeJkOPo6avz8Kj1+EXmJFzpLWq7FSGDWn4uaAZmTFw469wdEbGQO5wOoLFfmjLXkfy3wEm+OXCs9P2o7x19F9sxY0y2Juwq9sNq+5NCo86jLGTdkHWmNzvY95jEWI0PhSRmpgRg0qqw2wqA3Y9adt4KPxqiNAz+cjCi908IXMxQxjYZ9O/F6Af0A4C4KBJ0WWSGde/AB596X6lovRzbP+PaNS3CH/qO7noLcsW5ZrDf9As9hadRNhOjfsodtIlG/w8Uy4ppDsX0qGP5GOnjXFIrrAsTvL1q1N1Ibo3t17PySTj7akqX3TQrA+I2pJ05kylDGntNgjb4hljXD6Rk+f1EMtpml1kXhv9aFAYAUSDOUvaSk7alr2QOgBVAvdV4fr6i3FX7/VDfITVRO7bTm6Ww=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -510,85 +510,164 @@
                                                                                             <td style="width: 15%"></td>
                                                                                             <td>
                                                                                                 <div>
+                                                                                                    <img
+                                                                                                        src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/29850291-8e3d-be1c-6eec-ac0a262e2676.png"
+                                                                                                        style="width: 100%"/>
                                                                                                     <div
-                                                                                                        style="display: flex; justify-content: center; align-items: center;">
-                                                                                                        <img
-                                                                                                            src="https://mcusercontent.com/60ac1b84badc5aac609266713/images/29850291-8e3d-be1c-6eec-ac0a262e2676.png"
-                                                                                                            style="width: 100% ;height: 20%; min-height: 100px;"/>
-                                                                                                    </div>
-                                                                                                    <div
-                                                                                                        style="background-color: #fff; display: block; margin: 0px auto; box-shadow: 2px 0px 30px 0px #00000040">
+                                                                                                        style="background-color: #fff; display: block; border: 1px solid #eee">
                                                                                                         <div
                                                                                                             style="padding: 2rem 2rem">
-                                                                                                            <h1 style="margin: 0; font-size: 22px">
-                                                                                                                Password
-                                                                                                                Reset!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 25px 0px 14px 0px">
-                                                                                                                Hi
-                                                                                                                {{ $name }}</h2>
-                                                                                                            <p style="font-size: 14px">
-                                                                                                                We
-                                                                                                                received
-                                                                                                                a
-                                                                                                                request
-                                                                                                                to reset
-                                                                                                                the
-                                                                                                                password
-                                                                                                                for your
-                                                                                                                SJ
-                                                                                                                Computers
-                                                                                                                account.
-                                                                                                                If you
-                                                                                                                initiated
-                                                                                                                this
-                                                                                                                request,
-                                                                                                                please
-                                                                                                                use the
-                                                                                                                following
-                                                                                                                link to
-                                                                                                                set a
-                                                                                                                new
-                                                                                                                password:</p>
-                                                                                                            <table
-                                                                                                                width="100%">
+                                                                                                            <table>
                                                                                                                 <tbody>
                                                                                                                 <tr>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
+                                                                                                                    <td style="width: 65%">
+                                                                                                                        <h1 style="margin: 0; font-size: 22px">
+                                                                                                                            Recommended
+                                                                                                                            For
+                                                                                                                            You!</h1>
                                                                                                                     </td>
-                                                                                                                    <td style="width: 70%">
-                                                                                                                        <div
-                                                                                                                            style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                            <a href="{{ $actionUrl }}"
-                                                                                                                               style="color: #fff; text-decoration: none; cursor: pointer">RESET
-                                                                                                                                YOUR
-                                                                                                                                PASSWORD</a>
-                                                                                                                        </div>
+                                                                                                                    <td style="width: 3%">
                                                                                                                     </td>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
-                                                                                                                    </td>
+                                                                                                                    {{--                                                                                                                    <td style="width: 30%">--}}
+                                                                                                                    {{--                                                                                                                        <p style="margin: 0; font-size: 14px">--}}
+                                                                                                                    {{--                                                                                                                            Order--}}
+                                                                                                                    {{--                                                                                                                            No:--}}
+                                                                                                                    {{--                                                                                                                            <strong>#12345</strong>--}}
+                                                                                                                    {{--                                                                                                                        </p>--}}
+                                                                                                                    {{--                                                                                                                    </td>--}}
                                                                                                                 </tr>
                                                                                                                 </tbody>
                                                                                                             </table>
-                                                                                                            <p>If you
-                                                                                                                did not
-                                                                                                                request
-                                                                                                                a
-                                                                                                                password
-                                                                                                                reset,
-                                                                                                                please
-                                                                                                                contact
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
+                                                                                                                Hi
+                                                                                                                {{ $data['userInfo']['name'] }}</h2>
+                                                                                                            <p style="font-size: 14px">
+                                                                                                                At SJ
+                                                                                                                Computers,
+                                                                                                                we are
+                                                                                                                committed
+                                                                                                                to
+                                                                                                                providing
+                                                                                                                you with
+                                                                                                                cutting-
+                                                                                                                edge
+                                                                                                                technology
+                                                                                                                and
+                                                                                                                top-notch
+                                                                                                                products
+                                                                                                                that
+                                                                                                                enhance
+                                                                                                                your
+                                                                                                                digital
+                                                                                                                lifestyle.
+                                                                                                                Whether
+                                                                                                                you're a
+                                                                                                                professional
+                                                                                                                seeking
+                                                                                                                powerful
+                                                                                                                performance
+                                                                                                                or a
+                                                                                                                casual
+                                                                                                                user in
+                                                                                                                search
+                                                                                                                of
+                                                                                                                user-friendly
+                                                                                                                devices,
+                                                                                                                we've
+                                                                                                                got
+                                                                                                                something
+                                                                                                                for
+                                                                                                                everyone.</p>
+                                                                                                            <p style="font-size: 14px; margin-top: 1rem">
+                                                                                                                Here are
                                                                                                                 our
-                                                                                                                support
-                                                                                                                team
-                                                                                                                immediately
-                                                                                                                at <span
-                                                                                                                    style="color: #0a8ce9">[support@sjcomputers.us]</span>.
+                                                                                                                latest
+                                                                                                                and
+                                                                                                                greatest
+                                                                                                                recommendations
+                                                                                                                to take
+                                                                                                                your
+                                                                                                                computing
+                                                                                                                experience
+                                                                                                                to the
+                                                                                                                next
+                                                                                                                level:</p>
+                                                                                                            <div
+                                                                                                                style="margin: 1rem 0; padding: 1re">
+                                                                                                                <hr/>
+                                                                                                                <table
+                                                                                                                    style="width: 100%">
+                                                                                                                    <tbody>
+                                                                                                                    @foreach ($data['orderDetail']['order_detail']['order_item'] as $orderItem)
+                                                                                                                        <tr>
+                                                                                                                            <td style="width: 20%">
+                                                                                                                                <img
+                                                                                                                                    src="{{ $orderItem['product']['image'][0] ?? '' }}"/>
+                                                                                                                            </td>
+                                                                                                                            <td style="width: 40%">
+                                                                                                                                <div
+                                                                                                                                    style="margin: 10px">
+                                                                                                                                    <p style="font-size: 14px">
+                                                                                                                                        <strong>
+                                                                                                                                                <?php
+                                                                                                                                                $name = isset($orderItem['product_name']) ? $orderItem['product_name'] : 'null';
+                                                                                                                                                $words = explode(' ', $name);
+                                                                                                                                                $shortenedName = implode(' ', array_slice($words, 0, 3));
+                                                                                                                                                if (count($words) > 3) {
+                                                                                                                                                    $shortenedName .= '...';
+                                                                                                                                                }
+                                                                                                                                                echo $shortenedName;
+                                                                                                                                                ?>
+                                                                                                                                        </strong>
+                                                                                                                                    </p>
+                                                                                                                            </td>
+                                                                                                                            <td>
+                                                                                                                                <div
+                                                                                                                                    style="font-size: 13px">
+                                                                                                                                    <strong>${{ number_format((float) $orderItem['price'], 2) }}</strong>
+                                                                                                                                </div>
+                                                                                                                            </td>
+                                                                                                                        </tr>
+                                                                                                                    @endforeach
+                                                                                                                    <tr></tr>
+                                                                                                                    </tbody>
+                                                                                                                </table>
+                                                                                                                <hr/>
+                                                                                                            </div>
+                                                                                                            <p style="font-size: 14px; margin-top: 1rem">
+                                                                                                                Discover
+                                                                                                                more on
+                                                                                                                our
+                                                                                                                website:
+                                                                                                                [<span
+                                                                                                                    style="color: #0a8ce9">sjcomputers.us</span>]
                                                                                                             </p>
-                                                                                                            <p style="margin-top: 4rem">
+                                                                                                            <p style="font-size: 14px; margin-top: 1rem">
+                                                                                                                Don't
+                                                                                                                miss out
+                                                                                                                on our
+                                                                                                                exclusive
+                                                                                                                offers
+                                                                                                                and
+                                                                                                                promotions!
+                                                                                                                Limited
+                                                                                                                stock
+                                                                                                                available,
+                                                                                                                so act
+                                                                                                                fast.</p>
+                                                                                                            <p style="font-size: 14px; margin-top: 1rem">
                                                                                                                 Thank
-                                                                                                                you!</p>
+                                                                                                                you for
+                                                                                                                choosing
+                                                                                                                SJ
+                                                                                                                Computers
+                                                                                                                - where
+                                                                                                                technology
+                                                                                                                meets
+                                                                                                                innovation.</p>
+                                                                                                            <p style="margin-top: 4rem">
+                                                                                                                Best
+                                                                                                                Regards,</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -657,7 +736,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_58574171cdf60a56b30f27dc2b947b48"
+                                                                                   id="section_0ddfcaa0691e89baf4e48c28fa28dadf"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
@@ -737,6 +816,20 @@
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
+                                                                                                                                                    <div>
+                                                                                                                                                        <div
+                                                                                                                                                            data-block-id="6">
+                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"
+                                                                                                                                                               target="_blank"
+                                                                                                                                                               rel="noopener noreferrer"><img
+                                                                                                                                                                    style="max-width:100%"
+                                                                                                                                                                    width="137"
+                                                                                                                                                                    height="53"
+                                                                                                                                                                    alt="Email Marketing Powered by Mailchimp"
+                                                                                                                                                                    title="Mailchimp Email Marketing"
+                                                                                                                                                                    src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>
+                                                                                                                                                        </div>
+                                                                                                                                                    </div>
                                                                                                                                                 </td>
                                                                                                                                             </tr>
                                                                                                                                             </tbody>

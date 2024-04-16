@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api\Order;
 
 use App\Classes\StatusEnum;
+use App\Events\UpdateTrackingIdEvent;
 use App\Http\Controllers\Api\BaseController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\OrderListRequest;
 use App\Models\Order;
+use App\Observers\OrderObserver;
 use Carbon\Carbon;
 use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
@@ -17,6 +19,7 @@ use App\Models\UserAddress;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends BaseController
 {
@@ -165,5 +168,29 @@ class OrderController extends BaseController
         } catch(Exception $e){
             return $this->sendError('error',$e->getMessage());
         }  
+    }
+
+    public function updateTrackingId(Request $request, $id)
+    {
+        try{
+            DB::beginTransaction();
+            $trackingId = $request->tracking_id;
+            $order = Order::query()->findOrFail($id);
+            $order->update(['tracking_id' => $trackingId]);
+
+            // Manually call the observer method
+            $observer = new OrderObserver();
+            $observer->updated($order);
+
+            DB::commit();
+            return $this->sendResponse($order,'Successfully updated tracking id.');
+        }catch(ModelNotFoundException $e){
+            DB::rollBack();
+            return $this->sendError('error',"Order is not found.");
+        } catch(Exception $e){
+//            dd($e);
+            DB::rollBack();
+            return $this->sendError('error',$e->getMessage());
+        }
     }
 }
