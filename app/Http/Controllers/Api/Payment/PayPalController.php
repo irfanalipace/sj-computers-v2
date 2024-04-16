@@ -97,12 +97,14 @@ class PayPalController extends Controller
         $this->provide->setApiCredentials(config('paypal'));
         $paypalToken = $this->provide->getAccessToken();
         $response = $this->provide->capturePaymentOrder($request->token);
+        $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
+        $getCache = json_decode($cache->value);
+        $user =  $getCache->user;
 
         DB::beginTransaction();
         if(isset($response['status']) && $response['status'] == 'COMPLETED')
         {
 
-            $cache = cache::where('key','paypal_transaction_'.$request->token)->first();
 
             if(!$cache){
                 return redirect('checkout?error=Error in Paypal PLease try again.');
@@ -168,8 +170,6 @@ class PayPalController extends Controller
 
             $order = $repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPEPAYPAL, $orderData, $cartContent, $shippingAddressForm, $userType, $cartItems,(isset($getCache->is_buy_now ) && $getCache->is_buy_now == true));
             if (!$order) {
-                $errorMessage = 'Order not found';
-                PaymentFailedJob::dispatch($order, $errorMessage);
                 return redirect()->route('cancel');
             }
 
@@ -218,6 +218,8 @@ class PayPalController extends Controller
         } else {
 
             DB::rollBack();
+            $order = $user;
+            PaymentFailedJob::dispatch($order);
             return redirect('checkout?error=Order already capture Only one order per capture allowed.');
         }
     }
