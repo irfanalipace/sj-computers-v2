@@ -88,6 +88,7 @@ const Footer = () => {
                     </p>
                     <li>
                       <a
+                        target='_blank'
                         href='https://www.facebook.com/sjcomputersllc'
                         className='herf-link text-decoration-none'>
                         Facebook
@@ -95,6 +96,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
+                        target='_blank'
                         href='https://www.linkedin.com/company/sj-computers/'
                         className='herf-link text-decoration-none'>
                         LinkedIn
@@ -102,6 +104,7 @@ const Footer = () => {
                     </li>
                     <li>
                       <a
+                        target='_blank'
                         href='https://www.instagram.com/sjcomputersllc/'
                         className='herf-link text-decoration-none'>
                         Instagram
