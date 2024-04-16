@@ -45,6 +45,7 @@ import NotFound from '@pages/NotFound/NotFound';
 
 import Loader from '@common/LoaderComponent/LoaderComponent';
 import PageWrapper from '@components/PageWrapper/PageWrapper';
+import OrderReview from './views/components/OrderPage/OrderReview';
 
 const OrderDetails = React.lazy(
   () => import('./views/pages/OrderDetails.jsx/OrderDetails'),
