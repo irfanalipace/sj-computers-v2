@@ -233,7 +233,14 @@ const Router = () => {
         </PageWrapper>
       ),
     },
-
+    {
+      path: '/orders-review',
+      element: (
+        <PageWrapper>
+          <OrderReview />
+        </PageWrapper>
+      ),
+    },
     {
       path: '/touch-screen-laptops',
       element: (
