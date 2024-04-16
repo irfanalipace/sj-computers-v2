@@ -248,7 +248,7 @@ export const syncCartItems = () => {
             return cartItem;
           });
       }
-      if (cartItems.length > 0) {
+      if (cartItems?.length > 0) {
         try {
           let response = await addListToCartApi({ cartItems }); // posting local storage cart items in database
           let items = response?.data;
