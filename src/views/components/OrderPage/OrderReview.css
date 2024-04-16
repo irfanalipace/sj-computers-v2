@@ -83,7 +83,7 @@
   border-radius: 10px 0px 0px 0px;
   border: 1px solid #dddddd;
 }
-.submit-review-button button{
+.submit-review-button button {
   width: 240px;
   height: 39px;
   top: 1287px;
@@ -94,17 +94,17 @@
   color: white;
   border: 1px solid #318243;
   border-radius: 8px;
-
 }
-.submit-review-button{
-text-align: center;
+.submit-review-button {
+  text-align: center;
 }
 @media screen and (max-width: 600px) {
   .product-container-review {
     display: flow-root;
     justify-content: center;
     margin-top: 22px;
-  }.desktop-view{
+  }
+  .desktop-view {
     display: none;
   }
 
@@ -119,9 +119,8 @@ text-align: center;
   }
   .my-review-heading-paragraph {
     font-size: 12px;
-  }.container-review-inside-data {
-
+  }
+  .container-review-inside-data {
     width: auto;
-  
-}
+  }
 }

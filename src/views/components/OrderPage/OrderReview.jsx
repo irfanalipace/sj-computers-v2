@@ -12,8 +12,7 @@ function OrderReview() {
     setReviewText(event.target.value);
   };
 
-  const [cartDetails, setCartDetails] = useState(
-    [
+  const [cartDetails, setCartDetails] = useState([
     {
       id: 1,
       image: image1,
@@ -30,8 +29,7 @@ function OrderReview() {
       rating: 0,
       reviewText: '',
     },
-  ]
-);
+  ]);
 
   return (
     <>
@@ -43,55 +41,52 @@ function OrderReview() {
               Order Placed April 17, 2023
             </p>
           </div>
-      {
-        cartDetails.length===0?(
-        <>
-           <div className='empty-review-card'>
-            <p>No reviews to display</p>
-          </div>
-        </>
-        ):(
-        <>
-         {cartDetails.map((cart, index) => (
-            <div
-              className='container-review-inside-data card-details'
-              key={index}>
-              <div className='row'>
-                <div className='col-md-2'>
-                  <img src={cart.image} alt='Product' />
-                </div>
-                <div className='col-md-10'>
-                  <h5>{cart.name}</h5>
-                  <span>QTY: {cart.quantity}</span>
+          {cartDetails.length === 0 ? (
+            <>
+              <div className='empty-review-card'>
+                <p>No reviews to display</p>
+              </div>
+            </>
+          ) : (
+            <>
+              {cartDetails.map((cart, index) => (
+                <div
+                  className='container-review-inside-data card-details'
+                  key={index}>
+                  <div className='row'>
+                    <div className='col-md-2'>
+                      <img src={cart.image} alt='Product' />
+                    </div>
+                    <div className='col-md-10'>
+                      <h5>{cart.name}</h5>
+                      <span>QTY: {cart.quantity}</span>
 
-                  <div className='ratind-dev-sections rating-star-images'>
-                    <Rating
-                      required
-                      name={`rating-${index}`}
-                      spacing={7}
-                      className='custom-rating'
-                    />
-                  </div>
+                      <div className='ratind-dev-sections rating-star-images'>
+                        <Rating
+                          required
+                          name={`rating-${index}`}
+                          spacing={7}
+                          className='custom-rating'
+                        />
+                      </div>
 
-                  <div className='col-md-12'>
-                    <div className='product-review-text-area-rating-review-list'>
-                      <textarea
-                        required
-                        name='text'
-                        type='text'
-                        value={reviewText}
-                        onChange={handleTextChange}
-                        placeholder='Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available....'></textarea>
+                      <div className='col-md-12'>
+                        <div className='product-review-text-area-rating-review-list'>
+                          <textarea
+                            required
+                            name='text'
+                            type='text'
+                            value={reviewText}
+                            onChange={handleTextChange}
+                            placeholder='Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem ipsum may be used as a placeholder before final copy is available....'></textarea>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </>
-      )
-      }
-         
+              ))}
+            </>
+          )}
 
           <div className='submit-review-button'>
             <button>Submit</button>
@@ -99,9 +94,8 @@ function OrderReview() {
         </div>
       </div>
       <div className='desktop-view'>
-      <RecommandSectionsProducts />
+        <RecommandSectionsProducts />
       </div>
-     
     </>
   );
 }
