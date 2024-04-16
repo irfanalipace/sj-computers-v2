@@ -573,7 +573,7 @@
                                                                                                                 order: </p>
                                                                                                             <div
                                                                                                                 style="margin: 3rem 0 0 0; padding: 1re">
-                                                                                                                <hr/>
+
                                                                                                                 <table
                                                                                                                     style="width: 100%; font-size: 13px;">
                                                                                                                     <tbody>
@@ -582,14 +582,21 @@
                                                                                                                             Order
                                                                                                                             Details
                                                                                                                         </td>
+                                                                                                                        <td>
+                                                                                                                            Delivery
+                                                                                                                            by
+                                                                                                                        </td>
+                                                                                                                        <td>
+                                                                                                                            Price
+                                                                                                                        </td>
                                                                                                                     </tr>
                                                                                                                     </tbody>
                                                                                                                 </table>
-                                                                                                                <br/>
+                                                                                                                <hr/>
                                                                                                                 <table
                                                                                                                     style="width: 100%">
                                                                                                                     <tbody>
-{{--                                                                                                                    @dd($data);--}}
+                                                                                                                    {{--                                                                                                                    @dd($data);--}}
                                                                                                                     @foreach ($data['OrderDetail']['order_detail']['order_item'] as $orderItem)
                                                                                                                         <tr>
                                                                                                                             <td style="width: 20%">
@@ -598,7 +605,8 @@
                                                                                                                                     style="width: 60%; object-fit: contain"/>
                                                                                                                             </td>
                                                                                                                             <td style="width: 40%">
-                                                                                                                                <div style="margin: 10px">
+                                                                                                                                <div
+                                                                                                                                    style="margin: 10px">
                                                                                                                                     <p style="font-size: 14px">
                                                                                                                                         <strong>
                                                                                                                                                 <?php
@@ -610,7 +618,8 @@
                                                                                                                                                 }
                                                                                                                                                 echo $shortenedName;
                                                                                                                                                 ?>
-                                                                                                                                        </strong></p>
+                                                                                                                                        </strong>
+                                                                                                                                    </p>
                                                                                                                                 </div>
                                                                                                                             </td>
                                                                                                                             <td>
@@ -771,119 +780,119 @@
                                                                             </div>
                                                                         </td>
                                                                     </tr>
-                                                                    <tr>
-                                                                        <td style="background-color:#f4f4f4;padding-top:8px;padding-bottom:8px;padding-right:8px;padding-left:8px"
-                                                                            class="mceLayoutContainer" valign="top">
-                                                                            <table align="center" border="0"
-                                                                                   cellpadding="0" cellspacing="0"
-                                                                                   width="100%" role="presentation"
-                                                                                   data-block-id="7"
-                                                                                   id="section_d333c95ff13aaff4d2440ce751bc693c"
-                                                                                   class="mceFooterSection">
-                                                                                <tbody>
-                                                                                <tr class="mceRow">
-                                                                                    <td style="background-color:#f4f4f4;background-position:center;background-repeat:no-repeat;background-size:cover;padding-top:0px;padding-bottom:0px"
-                                                                                        valign="top">
-                                                                                        <table border="0"
-                                                                                               cellpadding="0"
-                                                                                               cellspacing="12"
-                                                                                               width="100%"
-                                                                                               role="presentation">
-                                                                                            <tbody>
-                                                                                            <tr>
-                                                                                                <td style="padding-top:0;padding-bottom:0;margin-bottom:12px"
-                                                                                                    class="mceColumn"
-                                                                                                    data-block-id="-3"
-                                                                                                    valign="top"
-                                                                                                    colspan="12"
-                                                                                                    width="100%">
-                                                                                                    <table border="0"
-                                                                                                           cellpadding="0"
-                                                                                                           cellspacing="0"
-                                                                                                           width="100%"
-                                                                                                           role="presentation">
-                                                                                                        <tbody>
-                                                                                                        <tr>
-                                                                                                            <td style="padding-top:12px;padding-bottom:12px;padding-right:16px;padding-left:16px"
-                                                                                                                class="mceBlockContainer"
-                                                                                                                align="center"
-                                                                                                                valign="top">
-                                                                                                                <div
-                                                                                                                    data-block-id="5"
-                                                                                                                    class="mceText"
-                                                                                                                    id="dataBlockId-5"
-                                                                                                                    style="display:inline-block;width:100%">
-                                                                                                                    <p class="last-child">
-                                                                                                                        <br/>
-                                                                                                                    </p>
-                                                                                                                </div>
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                        <tr>
-                                                                                                            <td class="mceLayoutContainer"
-                                                                                                                align="center"
-                                                                                                                valign="top">
-                                                                                                                <table
-                                                                                                                    align="center"
-                                                                                                                    border="0"
-                                                                                                                    cellpadding="0"
-                                                                                                                    cellspacing="0"
-                                                                                                                    width="100%"
-                                                                                                                    role="presentation"
-                                                                                                                    data-block-id="-2">
-                                                                                                                    <tbody>
-                                                                                                                    <tr class="mceRow">
-                                                                                                                        <td style="background-position:center;background-repeat:no-repeat;background-size:cover"
-                                                                                                                            valign="top">
-                                                                                                                            <table
-                                                                                                                                border="0"
-                                                                                                                                cellpadding="0"
-                                                                                                                                cellspacing="0"
-                                                                                                                                width="100%"
-                                                                                                                                role="presentation">
-                                                                                                                                <tbody>
-                                                                                                                                <tr>
-                                                                                                                                    <td class="mceColumn"
-                                                                                                                                        data-block-id="-5"
-                                                                                                                                        valign="top"
-                                                                                                                                        colspan="12"
-                                                                                                                                        width="100%">
-                                                                                                                                        <table
-                                                                                                                                            border="0"
-                                                                                                                                            cellpadding="0"
-                                                                                                                                            cellspacing="0"
-                                                                                                                                            width="100%"
-                                                                                                                                            role="presentation">
-                                                                                                                                            <tbody>
-                                                                                                                                            <tr>
-                                                                                                                                                <td align="center"
-                                                                                                                                                    valign="top">
-                                                                                                                                                </td>
-                                                                                                                                            </tr>
-                                                                                                                                            </tbody>
-                                                                                                                                        </table>
-                                                                                                                                    </td>
-                                                                                                                                </tr>
-                                                                                                                                </tbody>
-                                                                                                                            </table>
-                                                                                                                        </td>
-                                                                                                                    </tr>
-                                                                                                                    </tbody>
-                                                                                                                </table>
-                                                                                                            </td>
-                                                                                                        </tr>
-                                                                                                        </tbody>
-                                                                                                    </table>
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </td>
-                                                                    </tr>
+{{--                                                                    <tr>--}}
+{{--                                                                        <td style="background-color:#f4f4f4;padding-top:8px;padding-bottom:8px;padding-right:8px;padding-left:8px"--}}
+{{--                                                                            class="mceLayoutContainer" valign="top">--}}
+{{--                                                                            <table align="center" border="0"--}}
+{{--                                                                                   cellpadding="0" cellspacing="0"--}}
+{{--                                                                                   width="100%" role="presentation"--}}
+{{--                                                                                   data-block-id="7"--}}
+{{--                                                                                   id="section_d333c95ff13aaff4d2440ce751bc693c"--}}
+{{--                                                                                   class="mceFooterSection">--}}
+{{--                                                                                <tbody>--}}
+{{--                                                                                <tr class="mceRow">--}}
+{{--                                                                                    <td style="background-color:#f4f4f4;background-position:center;background-repeat:no-repeat;background-size:cover;padding-top:0px;padding-bottom:0px"--}}
+{{--                                                                                        valign="top">--}}
+{{--                                                                                        <table border="0"--}}
+{{--                                                                                               cellpadding="0"--}}
+{{--                                                                                               cellspacing="12"--}}
+{{--                                                                                               width="100%"--}}
+{{--                                                                                               role="presentation">--}}
+{{--                                                                                            <tbody>--}}
+{{--                                                                                            <tr>--}}
+{{--                                                                                                <td style="padding-top:0;padding-bottom:0;margin-bottom:12px"--}}
+{{--                                                                                                    class="mceColumn"--}}
+{{--                                                                                                    data-block-id="-3"--}}
+{{--                                                                                                    valign="top"--}}
+{{--                                                                                                    colspan="12"--}}
+{{--                                                                                                    width="100%">--}}
+{{--                                                                                                    <table border="0"--}}
+{{--                                                                                                           cellpadding="0"--}}
+{{--                                                                                                           cellspacing="0"--}}
+{{--                                                                                                           width="100%"--}}
+{{--                                                                                                           role="presentation">--}}
+{{--                                                                                                        <tbody>--}}
+{{--                                                                                                        <tr>--}}
+{{--                                                                                                            <td style="padding-top:12px;padding-bottom:12px;padding-right:16px;padding-left:16px"--}}
+{{--                                                                                                                class="mceBlockContainer"--}}
+{{--                                                                                                                align="center"--}}
+{{--                                                                                                                valign="top">--}}
+{{--                                                                                                                <div--}}
+{{--                                                                                                                    data-block-id="5"--}}
+{{--                                                                                                                    class="mceText"--}}
+{{--                                                                                                                    id="dataBlockId-5"--}}
+{{--                                                                                                                    style="display:inline-block;width:100%">--}}
+{{--                                                                                                                    <p class="last-child">--}}
+{{--                                                                                                                        <br/>--}}
+{{--                                                                                                                    </p>--}}
+{{--                                                                                                                </div>--}}
+{{--                                                                                                            </td>--}}
+{{--                                                                                                        </tr>--}}
+{{--                                                                                                        <tr>--}}
+{{--                                                                                                            <td class="mceLayoutContainer"--}}
+{{--                                                                                                                align="center"--}}
+{{--                                                                                                                valign="top">--}}
+{{--                                                                                                                <table--}}
+{{--                                                                                                                    align="center"--}}
+{{--                                                                                                                    border="0"--}}
+{{--                                                                                                                    cellpadding="0"--}}
+{{--                                                                                                                    cellspacing="0"--}}
+{{--                                                                                                                    width="100%"--}}
+{{--                                                                                                                    role="presentation"--}}
+{{--                                                                                                                    data-block-id="-2">--}}
+{{--                                                                                                                    <tbody>--}}
+{{--                                                                                                                    <tr class="mceRow">--}}
+{{--                                                                                                                        <td style="background-position:center;background-repeat:no-repeat;background-size:cover"--}}
+{{--                                                                                                                            valign="top">--}}
+{{--                                                                                                                            <table--}}
+{{--                                                                                                                                border="0"--}}
+{{--                                                                                                                                cellpadding="0"--}}
+{{--                                                                                                                                cellspacing="0"--}}
+{{--                                                                                                                                width="100%"--}}
+{{--                                                                                                                                role="presentation">--}}
+{{--                                                                                                                                <tbody>--}}
+{{--                                                                                                                                <tr>--}}
+{{--                                                                                                                                    <td class="mceColumn"--}}
+{{--                                                                                                                                        data-block-id="-5"--}}
+{{--                                                                                                                                        valign="top"--}}
+{{--                                                                                                                                        colspan="12"--}}
+{{--                                                                                                                                        width="100%">--}}
+{{--                                                                                                                                        <table--}}
+{{--                                                                                                                                            border="0"--}}
+{{--                                                                                                                                            cellpadding="0"--}}
+{{--                                                                                                                                            cellspacing="0"--}}
+{{--                                                                                                                                            width="100%"--}}
+{{--                                                                                                                                            role="presentation">--}}
+{{--                                                                                                                                            <tbody>--}}
+{{--                                                                                                                                            <tr>--}}
+{{--                                                                                                                                                <td align="center"--}}
+{{--                                                                                                                                                    valign="top">--}}
+{{--                                                                                                                                                </td>--}}
+{{--                                                                                                                                            </tr>--}}
+{{--                                                                                                                                            </tbody>--}}
+{{--                                                                                                                                        </table>--}}
+{{--                                                                                                                                    </td>--}}
+{{--                                                                                                                                </tr>--}}
+{{--                                                                                                                                </tbody>--}}
+{{--                                                                                                                            </table>--}}
+{{--                                                                                                                        </td>--}}
+{{--                                                                                                                    </tr>--}}
+{{--                                                                                                                    </tbody>--}}
+{{--                                                                                                                </table>--}}
+{{--                                                                                                            </td>--}}
+{{--                                                                                                        </tr>--}}
+{{--                                                                                                        </tbody>--}}
+{{--                                                                                                    </table>--}}
+{{--                                                                                                </td>--}}
+{{--                                                                                            </tr>--}}
+{{--                                                                                            </tbody>--}}
+{{--                                                                                        </table>--}}
+{{--                                                                                    </td>--}}
+{{--                                                                                </tr>--}}
+{{--                                                                                </tbody>--}}
+{{--                                                                            </table>--}}
+{{--                                                                        </td>--}}
+{{--                                                                    </tr>--}}
                                                                     </tbody>
                                                                 </table>
                                                             </td>
