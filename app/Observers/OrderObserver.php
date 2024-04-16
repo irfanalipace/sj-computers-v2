@@ -24,7 +24,7 @@ class OrderObserver
      * @param  \App\Models\Order  $order
      * @return void
      */
-    public function updated(Order $order)
+    public function updated($order)
     {
           // Check if tracking_id was updated
         if ($order->wasChanged('tracking_id')) {

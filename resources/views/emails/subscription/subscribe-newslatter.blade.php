@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -518,9 +518,10 @@
                                                                                                             <h1 style="margin: 0; font-size: 22px">
                                                                                                                 Subscription
                                                                                                                 Confirm!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
-                                                                                                                Hi
-                                                                                                                {{ $data->name ?? 'Customer' }}</h2>
+{{--                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">--}}
+{{--                                                                                                                Hi--}}
+{{--                                                                                                                {{ $data->name ?? 'Customer' }}</h2>--}}
+                                                                                                            <br>
                                                                                                             <p style="font-size: 14px">
                                                                                                                 Thank
                                                                                                                 you for
@@ -688,19 +689,6 @@
                                                                                                                                             <tr>
                                                                                                                                                 <td align="center"
                                                                                                                                                     valign="top">
-                                                                                                                                                    <div>
-                                                                                                                                                        <div data-block-id="6">
-                                                                                                                                                            <a href="http://eepurl.com/iNe6JE"
-                                                                                                                                                               target="_blank"
-                                                                                                                                                               rel="noopener noreferrer"><img
-                                                                                                                                                                        style="max-width:100%"
-                                                                                                                                                                        width="137"
-                                                                                                                                                                        height="53"
-                                                                                                                                                                        alt="Email Marketing Powered by Mailchimp"
-                                                                                                                                                                        title="Mailchimp Email Marketing"
-                                                                                                                                                                        src="https://cdn-images.mailchimp.com/monkey_rewards/intuit-mc-rewards-1.png"/></a>
-                                                                                                                                                        </div>
-                                                                                                                                                    </div>
                                                                                                                                                 </td>
                                                                                                                                             </tr>
                                                                                                                                             </tbody>

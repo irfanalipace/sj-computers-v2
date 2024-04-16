@@ -403,7 +403,7 @@
             !function () {
                 if (BOOMR = a.BOOMR || {}, BOOMR.plugins = BOOMR.plugins || {}, !BOOMR.plugins.AK) {
                     var e = "" == "true" ? 1 : 0, t = "",
-                        n = "y32l2haxyekygzqt2jjq-f-41c56017f-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
+                        n = "y32l2haxyekygzqt2jxq-f-b1e818fe0-clientnsv4-s.akamaihd.net", i = "false" == "true" ? 2 : 1,
                         _ = {
                             "ak.v": "37",
                             "ak.cp": "1513051",
@@ -412,7 +412,7 @@
                             "ak.cr": 1,
                             "ak.ipv": 4,
                             "ak.proto": "h2",
-                            "ak.rid": "378f021",
+                            "ak.rid": "37a9692",
                             "ak.r": 45582,
                             "ak.a2": e,
                             "ak.m": "x",
@@ -425,8 +425,8 @@
                             "ak.0rtt": "",
                             "ak.csrc": "-",
                             "ak.acc": "",
-                            "ak.t": "1712575059",
-                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==L5ecBVUO3OS4OSXD8NU+RyalddlJCLkzPIcZdKe/zNbHkb5Ts3+2aHSMmZgBe4TYXRycZ3aQizaqy/gJ4cw3hzs0ZQJ/5ghDS7TbiB8T4lPaYLi9+2PAyFhxMidtA4OtbE9lIL2qEz8ccqk+aONHvop0HUy1ghkC4FnlcszJ4gcav+jwKJ5KD1JOHhhghDjkGUXL1WZnRoPIb27Mzi/vcQTjqx2c6WEqbu64JGDsseTRvSm+KvjLN7V9IYcZEVh1s6MqdbWz1Uzm/b4Q/O4U7U9YoEqd+wx1FwPA328QbPxzOox4wIb5YuKFxnRBveEYJoRxQdDoozzNy4Qbx8M1X7odHMeEAGNEr8mBL9aZjlYvBdiK5taDTWbthttkiiPlmNxzMgZ9FoGwlkG+lm2tnZMxSB570KD8tZ0T1IKTUvs=",
+                            "ak.t": "1712575087",
+                            "ak.ak": "hOBiQwZUYzCg5VSAfCLimQ==SJPkk0iLxZxO1VdKvqO3QWM6VBvdckLhvNqlq6qN2zdGUk/sG+WPPhCbPQnxwIJbaKU10wXtfZxAUnDsOSlmaV7N7M22mjmOaobShhO10BHmxJa4gmCMGOh1ZmJ4b+ghsJjz94deWGfUpdpkt/265HF9sdgGS2fSj4dacfaqBruTQLWyAWZlkObZxKxpcJnV31QCGRQTke8eH99SMvMTJ1rRoYNysH9DwT5j2ftPgOtXNwvx7yyo8ft8+TZu6wwF1CcxTEt0lUgQFd2od9R5MYhbRFgtePDlwJN02et5avFNCRf6CV9ZB1jbuyPrsVkN/34Ggae686kSgjY+49M4HdT7ctzXvMOv6jzjlVZIzQh2Yvwajt+D020x5yFdUGlHOtmKelSg++FxwL+OY2zjh3VeqyX2+7qGJNae8Ksg+D0=",
                             "ak.pv": "31",
                             "ak.dpoabenc": "",
                             "ak.tf": i
@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -503,7 +503,7 @@
                                                                             <div data-block-id="11" class="mceCode">
                                                                                 <title>Document</title>
                                                                                 <div
-                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color: #00305E; padding: 4rem 0px; height: 100%;">
+                                                                                    style="background: linear-gradient(to bottom, #00305E 0%, #00305E 33.33%, #FFFFFF 33.33%, #FFFFFF 100%); background-color:  #00305E; padding: 4rem 0px; height: 100%;">
                                                                                     <table>
                                                                                         <tbody>
                                                                                         <tr>
@@ -521,74 +521,38 @@
                                                                                                         <div
                                                                                                             style="padding: 2rem 2rem">
                                                                                                             <h1 style="margin: 0; font-size: 22px">
-                                                                                                                Password
-                                                                                                                Reset!</h1>
-                                                                                                            <h2 style="font-size: 18px; padding: 25px 0px 14px 0px">
-                                                                                                                Hi
-                                                                                                                {{ $name }}</h2>
+                                                                                                                Payment
+                                                                                                                Failure
+                                                                                                                Alert!</h1>
+                                                                                                            <h2 style="font-size: 18px; padding: 10px 0px">
+                                                                                                                Hi {{ $data['order']['user']['name'] }}</h2>
                                                                                                             <p style="font-size: 14px">
                                                                                                                 We
-                                                                                                                received
-                                                                                                                a
-                                                                                                                request
-                                                                                                                to reset
-                                                                                                                the
-                                                                                                                password
-                                                                                                                for your
-                                                                                                                SJ
-                                                                                                                Computers
-                                                                                                                account.
-                                                                                                                If you
-                                                                                                                initiated
-                                                                                                                this
-                                                                                                                request,
-                                                                                                                please
-                                                                                                                use the
-                                                                                                                following
-                                                                                                                link to
-                                                                                                                set a
-                                                                                                                new
-                                                                                                                password:</p>
-                                                                                                            <table
-                                                                                                                width="100%">
-                                                                                                                <tbody>
-                                                                                                                <tr>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
-                                                                                                                    </td>
-                                                                                                                    <td style="width: 70%">
-                                                                                                                        <div
-                                                                                                                            style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                            <a href="{{ $actionUrl }}"
-                                                                                                                               style="color: #fff; text-decoration: none; cursor: pointer">RESET
-                                                                                                                                YOUR
-                                                                                                                                PASSWORD</a>
-                                                                                                                        </div>
-                                                                                                                    </td>
-                                                                                                                    <td style="width: 15%"></td>
-                                                                                                                    <td>
-                                                                                                                    </td>
-                                                                                                                </tr>
-                                                                                                                </tbody>
-                                                                                                            </table>
-                                                                                                            <p>If you
-                                                                                                                did not
-                                                                                                                request
-                                                                                                                a
-                                                                                                                password
-                                                                                                                reset,
-                                                                                                                please
+                                                                                                                regret
+                                                                                                                to
+                                                                                                                inform
+                                                                                                                you that
+                                                                                                                there
+                                                                                                                was an
+                                                                                                                issue
+                                                                                                                processing
+                                                                                                                your
+                                                                                                                recent
+                                                                                                                payment
+                                                                                                                for the
+                                                                                                                order
+                                                                                                                <strong>#{{ $data['order']['id'] }}</strong>.
+                                                                                                                Please
                                                                                                                 contact
-                                                                                                                our
-                                                                                                                support
-                                                                                                                team
-                                                                                                                immediately
-                                                                                                                at <span
-                                                                                                                    style="color: #0a8ce9">[support@sjcomputers.us]</span>.
+                                                                                                                your
+                                                                                                                respective
+                                                                                                                bank.
                                                                                                             </p>
+                                                                                                            <p style="font-size: 14px; margin-top: 4rem; text-align: center">
+                                                                                                                {{ $data['ErrorMessage'] }}</p>
                                                                                                             <p style="margin-top: 4rem">
                                                                                                                 Thank
-                                                                                                                you!</p>
+                                                                                                                you,</p>
                                                                                                             <p><strong>SJ
                                                                                                                     Computers
                                                                                                                     Team</strong>
@@ -657,7 +621,7 @@
                                                                                    cellpadding="0" cellspacing="0"
                                                                                    width="100%" role="presentation"
                                                                                    data-block-id="7"
-                                                                                   id="section_58574171cdf60a56b30f27dc2b947b48"
+                                                                                   id="section_7fdff2ad05fd7d62ba737a0de4536d58"
                                                                                    class="mceFooterSection">
                                                                                 <tbody>
                                                                                 <tr class="mceRow">
