@@ -44,7 +44,7 @@ const SimilarInterestSlider = ({ products }) => {
   };
 
   useEffect(() => {
-    if (products.length) {
+    if (products?.length) {
       viewItemDataLayer(products);
     }
   }, [products]);
