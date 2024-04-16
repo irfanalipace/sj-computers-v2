@@ -3,20 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 import Accordion from '@mui/material/Accordion';
-import AccordionActions from '@mui/material/AccordionActions';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Button from '@mui/material/Button';
-import { Grid, IconButton, Typography } from '@mui/material';
+import { IconButton, Typography } from '@mui/material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CloseIcon from '@mui/icons-material/Close';
 import { useLocation } from 'react-router-dom';
-
-import Loader from '@common/Spinner/Spinner';
 import OverlayLoader from '@common/LoaderComponent/OverlayLoader';
-
 import { getFilterListApi } from '@api/filters';
 import { SET_FILTERS_ARRAY } from '@store/products/productsSlice';
 
@@ -44,7 +38,6 @@ const FilterBarlayout2 = ({
   const [visibleCategories, setVisibleCategories] = useState(8);
   const [visibleEntries, setVisibleEntries] = useState({});
   const isLoading = useSelector(state => state.products.isFiltering);
-  const filtersArray = useSelector(state => state.products.filtersArray);
   const [activePriceFiler, setActinePriceFilter] = useState('');
   const [customPriceError, setCustomPriceError] = useState('');
   const [firstRender, setFirstRender] = useState(true);
@@ -62,9 +55,6 @@ const FilterBarlayout2 = ({
       { id: 11, name: 'priceMax', placeholder: 'Max' },
     ],
   });
-
-  const [ramData, setRamData] = useState([{ gb: [], tb: 0 }]);
-  const [hardDistData, setHardDiskData] = useState([{ gb: [], tb: 0 }]);
 
   const dispatch = useDispatch();
   const storeFilters = useSelector(state => state.products.filtersArray);
@@ -146,14 +136,6 @@ const FilterBarlayout2 = ({
       document.getElementById(`customInput${10}`).value = '';
       document.getElementById(`customInput${11}`).value = '';
     }
-
-    // clearFilter(category);
-
-    // setFiltersInArray(prevArray => {
-    //   // Filter out filters with the specified category
-    //   const updatedArray = prevArray.filter(filter => filter.key !== category);
-    //   return updatedArray;
-    // });
   };
 
   function generateRealisticOptions(highestGb, lowestGb) {
@@ -244,6 +226,10 @@ const FilterBarlayout2 = ({
       values.splice(indexOfItemToBeRemoved, 1);
     }
 
+    if (['hard_disk', 'ram_memory'].includes(categ)) {
+      storeFiltersDuplicate[indexOfFilter].unit = getUnits(values);
+    }
+
     if (typeof myProp === 'function' || isNewApi) {
       upateFilters(storeFiltersDuplicate);
       return;
@@ -261,11 +247,6 @@ const FilterBarlayout2 = ({
       let data = response?.data;
       setFilters(data ? data : {});
 
-      const highestGb = data?.ram_memory?.highest_GB;
-      const lowestGb = data?.ram_memory?.least_GB;
-      const realisticOptions = generateRealisticOptions(highestGb, lowestGb);
-      const ramOptions = realisticOptions.filter(option => option <= highestGb);
-      setRamData([{ gb: ramOptions, tb: data?.ram_memory?.least_TB }]);
       if (data?.review?.min_rating && data?.review?.max_rating) {
         let newArray = [];
         const one = [1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9];
@@ -341,17 +322,6 @@ const FilterBarlayout2 = ({
         setReviewOptions(newArray?.sort((a, b) => b.value - a.value));
       }
 
-      const highestHardDiskGb = data?.hard_disk?.highest_GB;
-      // const lowestHardDiskGb = data.hard_disk.least_GB;
-      const realisticOptionsHardDisk = generateRealisticOptions(
-        highestHardDiskGb,
-        64,
-      );
-      const hardDiskOptions = realisticOptionsHardDisk.filter(
-        option => option <= highestGb,
-      );
-      setHardDiskData([{ gb: hardDiskOptions, tb: data?.hard_disk?.least_TB }]);
-
       const priceShapedArray = getPriceRanges(
         data?.price?.min_price,
         data?.price?.max_price,
@@ -393,8 +363,29 @@ const FilterBarlayout2 = ({
     return false;
   };
 
+  function getUnits(sizes) {
+    const units = [];
+
+    for (let size of sizes) {
+      if (size.includes('MB')) {
+        if (units.includes('MB')) continue;
+        units.push('MB');
+      }
+
+      if (size.includes('GB')) {
+        if (units.includes('GB')) continue;
+        units.push('GB');
+      }
+
+      if (size.includes('TB')) {
+        if (units.includes('TB')) continue;
+        units.push('TB');
+      }
+    }
+    return units;
+  }
+
   let renderedItems = (options, category) => {
-    console.log(visibleEntries, category);
     let optionArray = options.slice(
       0,
       visibleEntries?.[category]?.visibleEntries,
@@ -454,18 +445,6 @@ const FilterBarlayout2 = ({
       setCustomPriceError('');
     }
   }, [customPrice]);
-
-  // let renderedCategories = Object.entries(filters).map(
-  //     ([category, options], index) => (
-  //         <li className="filter-key" key={`${category}-${index}`}>
-  //             <h4 className="filter-heading">{category}</h4>
-  //             <ul className="filter-values-list">
-  //                 {renderedItems(options, category)}
-  //                 {console.log(renderedCategories,'jfdwejfwfhwhfwe ewhfewhefhwfhwef')}
-  //             </ul>
-  //         </li>
-  //     )
-  // );
 
   const handlePriceFilter = item => {
     setActinePriceFilter(item.id);
@@ -532,20 +511,7 @@ const FilterBarlayout2 = ({
                   clear
                 </span>
               )}
-              {/* {inDrawer ? (
-                <span className={`${inDrawer ? 'align-to-end' : ''}`}>
-                  <IconButton>
-                    {DataInDrawer[index + 3] ? (
-                      <KeyboardArrowUpIcon sx={{ color: 'orange' }} />
-                    ) : (
-                      <KeyboardArrowDownIcon />
-                    )}{' '}
-                  </IconButton>
-                </span>
-              ) : (
-                '' 
-              
-              )}*/}
+
               {inDrawer && (
                 <span className={`${inDrawer ? 'align-to-end' : ''}`}>
                   <IconButton>
@@ -646,150 +612,6 @@ const FilterBarlayout2 = ({
       filter => filter.key.toLowerCase() === category.toLowerCase(),
     );
     return indexOfFilter;
-  };
-
-  let renderRangeSliders = category => {
-    if (category === 'screen') return;
-
-    function getUnits(sizes) {
-      const units = [];
-
-      for (let size of sizes) {
-        if (size.includes('GB')) {
-          if (units.includes('GB')) continue;
-          units.push('GB');
-        }
-        if (size.includes('TB')) {
-          if (units.includes('TB')) continue;
-          units.push('TB');
-        }
-      }
-      return units;
-    }
-
-    const handleUnitFilters = (event, categ, currentItem) => {
-      if (categ === 'price') return;
-      const indexOfFilter = getIndexOfFilter(categ);
-      const storeFiltersDuplicate = JSON.parse(JSON.stringify(storeFilters));
-
-      const values = storeFiltersDuplicate[indexOfFilter].value;
-      if (event.target.checked) values.push(currentItem);
-
-      if (!event.target.checked) {
-        const indexOfItemToBeRemoved = values.findIndex(
-          val => val === currentItem,
-        );
-
-        values.splice(indexOfItemToBeRemoved, 1);
-      }
-
-      storeFiltersDuplicate[indexOfFilter].unit = getUnits(values);
-
-      if (typeof myProp === 'function' || isNewApi) {
-        upateFilters(storeFiltersDuplicate);
-        return;
-      }
-
-      dispatch(SET_FILTERS_ARRAY(storeFiltersDuplicate));
-    };
-
-    return (
-      <ul className='filter-values-list'>
-        {category === 'ram_memory' ? (
-          <>
-            {ramData[0].gb.map((item, index) => {
-              return (
-                <li key={`ram_memory${index}`} className='filter-value'>
-                  <label
-                    className='radio-container'
-                    htmlFor={`ram${item}ram-memory`}>
-                    <input
-                      id={`ram${item}ram-memory`}
-                      type='checkbox'
-                      checked={storeFilters[
-                        getIndexOfFilter('ram_memory')
-                      ].value.includes(`${item} GB`)}
-                      name={`ram${item}ram-memory`}
-                      onChange={event => {
-                        handleUnitFilters(event, category, `${item} GB`);
-                      }}
-                    />
-                    <span className='radiomark '></span> {item + ' GB'}
-                  </label>
-                </li>
-              );
-            })}
-
-            {ramData[0]?.tb > 0 && (
-              <li className='filter-value'>
-                <label className='radio-container' htmlFor={'tb'}>
-                  <input
-                    id={'tb'}
-                    type='checkbox'
-                    checked={storeFilters[
-                      getIndexOfFilter('ram_memory')
-                    ].value.includes(`${1} TB`)}
-                    onChange={event => {
-                      handleUnitFilters(event, category, `${1} TB`);
-                    }}
-                  />
-                  <span className='radiomark '></span> {1 + ' TB & above'}
-                </label>
-              </li>
-            )}
-          </>
-        ) : (
-          <></>
-        )}
-        {/* { id: 1, label: '64 GB', value: 64, type: 'GB' }, */}
-
-        {category === 'hard_disk' ? (
-          <>
-            {hardDistData.map(ram => {
-              return ram.gb.map((item, index) => {
-                return (
-                  <li key={`${item}hdkey`} className='filter-value'>
-                    <label className='radio-container' htmlFor={`${item}hd`}>
-                      <input
-                        id={`${item}hd`}
-                        type='checkbox'
-                        checked={storeFilters[
-                          getIndexOfFilter('hard_disk')
-                        ].value.includes(`${item} GB`)}
-                        name={`${item}hdname`}
-                        onChange={event => {
-                          handleUnitFilters(event, category, `${item} GB`);
-                        }}
-                      />
-                      <span className='radiomark '></span> {item + ' GB'}
-                    </label>
-                  </li>
-                );
-              });
-            })}
-            {hardDistData[0]?.tb > 0 && (
-              <li className='filter-value'>
-                <label className='radio-container' htmlFor={'tbhd'}>
-                  <input
-                    id={'tbhd'}
-                    type='checkbox'
-                    checked={storeFilters[
-                      getIndexOfFilter('hard_disk')
-                    ].value.includes(`${1} TB`)}
-                    onChange={event => {
-                      handleUnitFilters(event, category, `${1} TB`);
-                    }}
-                  />
-                  <span className='radiomark '></span> {'1 TB & Above'}
-                </label>
-              </li>
-            )}
-          </>
-        ) : (
-          <></>
-        )}
-      </ul>
-    );
   };
 
   const renderGpu = category => {
@@ -918,13 +740,9 @@ const FilterBarlayout2 = ({
                     padding: inDrawer ? '0px 20px' : '',
                     marginLeft: inDrawer ? '16px' : '',
                   }}>
-                  {/* {category === 'screen' &&
-                    renderedScreenItems(options, category)} */}
                   {Array.isArray(filters[category])
                     ? renderedItems(options, category)
-                    : renderRangeSliders(category)}
-                  {/* {Array.isArray(filters[category]) &&
-                    renderedItems(options, category)} */}
+                    : ''}
                 </ul>
               )}
             </li>
@@ -1010,17 +828,10 @@ const FilterBarlayout2 = ({
             padding: inDrawer ? '0px' : '',
             margin: inDrawer ? '0px' : '',
           }}>
-          {/* {renderRangeSliders('price')} */}
           {renderPrice('price')}
           {renderedCategories}
           {/* Below Categories is for Gpu and trnding */}
           {categorySlug !== 'bto' && renderCategoriesGpuAndTrending}
-          {/* <li className="filter-value">
-          <button onClick={handleShowMoreCategory}>
-          <span className="me-2">Show More</span>
-                            <FontAwesomeIcon icon={faAngleDown} />
-                        </button>
-                    </li> */}
         </ul>
       </div>
     </div>
