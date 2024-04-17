@@ -87,7 +87,7 @@ const Subscribe = () => {
         )}
         {!user && (
           <p style={{ fontSize: '12px' }} className='mt-2 mb-5'>
-            New Customer ? <Link href={!user && '/register'}>Start here.</Link>
+            New Customer ? <Link to={!user && '/register'}>Start here.</Link>
           </p>
         )}
       </Grid>
