@@ -7,14 +7,17 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { subscribeEmail } from '../../../core/api/subscribeEmail';
 import { toast } from 'react-toastify';
+import { CircularProgress } from '@mui/material';
 
 const Subscribe = () => {
   const user = useSelector(state => state?.auth?.isAuthenticated);
   const navigate = useNavigate();
   const [emailInput, setEmailInput] = useState('');
   const [isChecked, setIsChecked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubscribe = () => {
+    setIsLoading(true);
     subscribeEmail(emailInput)
       .then(response => {
         toast.success(response?.message);
@@ -26,6 +29,9 @@ const Subscribe = () => {
         console.error('Error subscribing email:', error);
         toast.error(error?.data?.code || error?.data?.message);
         // Handle error, show error message, etc.
+      })
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -64,11 +70,16 @@ const Subscribe = () => {
           <button
             className='button-subscribe'
             style={{
-              backgroundColor: !isChecked || emailInput === '' ? 'gray' : '',
+              backgroundColor:
+                !isChecked || emailInput === '' || isLoading ? 'gray' : '',
             }}
-            disabled={emailInput === '' || !isChecked} // Disable if emailInput is empty or checkbox not checked
+            disabled={emailInput === '' || !isChecked || isLoading} // Disable if emailInput is empty or checkbox not checked
             onClick={handleSubscribe}>
-            Subscribe
+            {isLoading ? (
+              <CircularProgress sx={{ color: 'white' }} size={'20px'} />
+            ) : (
+              ' Subscribe'
+            )}
           </button>
           <br />
           <Grid container mt={2}>
