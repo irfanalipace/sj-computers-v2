@@ -110,8 +110,6 @@ class SquareController extends BaseController
 
             $order = $this->repository->createOrder(array(), $userIdToPass, $user, StatusEnum::PAYMENTTYPESQUARE, $orderData, $cartContent, $request->shipping_address, $user_type, $cartItems,(isset($request->is_buy_now ) && $request->is_buy_now));
             if (!$order) {
-                $errorMessage = 'Order not found';
-                PaymentFailedJob::dispatch($order, $errorMessage);
                throw new Exception('Please Try Again.');
             }
 
@@ -147,6 +145,7 @@ class SquareController extends BaseController
                 Cart::session($userIdToPass)->clearCartConditions();
             } else {
                 DB::rollBack();
+                $order = $user;
                 PaymentFailedJob::dispatch($order);
                 $errors = $api_response->getErrors();
 

@@ -315,3 +315,5 @@ Route::post('subscribe-newsletter',[NewsLetterController::class,'subscription'])
 Route::get('get-discount-product',[ProductController::class,'getDiscountProduct']);
 
 Route::get('get-order/{order_no}',[OrderController::class,'getOrderByNo']);
+
+Route::post('order-item-reviews',[ReviewController::class,'orderItemReview']);

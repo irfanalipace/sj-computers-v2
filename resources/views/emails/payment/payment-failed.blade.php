@@ -459,7 +459,7 @@
 <body>
 <!--*|IF:MC_PREVIEW_TEXT|*-->
 <!--[if !gte mso 9]><!----><span class="mcnPreviewText"
-                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;">*|MC_PREVIEW_TEXT|*</span>
+                                 style="display:none; font-size:0px; line-height:0px; max-height:0px; max-width:0px; opacity:0; overflow:hidden; visibility:hidden; mso-hide:all;"></span>
 <!--<![endif]-->
 <!--*|END:IF|*-->
 <center>
@@ -525,7 +525,7 @@
                                                                                                                 Failure
                                                                                                                 Alert!</h1>
                                                                                                             <h2 style="font-size: 18px; padding: 10px 0px">
-                                                                                                                Hi {{ $data['order']['user']['name'] }}</h2>
+                                                                                                                Hi {{ $name ?? 'Customer' }}</h2>
                                                                                                             <p style="font-size: 14px">
                                                                                                                 We
                                                                                                                 regret
@@ -537,19 +537,15 @@
                                                                                                                 issue
                                                                                                                 processing
                                                                                                                 your
-                                                                                                                recent
-                                                                                                                payment
-                                                                                                                for the
-                                                                                                                order
-                                                                                                                <strong>#{{ $data['order']['id'] }}</strong>.
+                                                                                                                order.
                                                                                                                 Please
                                                                                                                 contact
                                                                                                                 your
                                                                                                                 respective
                                                                                                                 bank.
                                                                                                             </p>
-                                                                                                            <p style="font-size: 14px; margin-top: 4rem; text-align: center">
-                                                                                                                {{ $data['ErrorMessage'] }}</p>
+{{--                                                                                                            <p style="font-size: 14px; margin-top: 4rem; text-align: center">--}}
+{{--                                                                                                                {{ $data['error_message'] }}</p>--}}
                                                                                                             <p style="margin-top: 4rem">
                                                                                                                 Thank
                                                                                                                 you,</p>

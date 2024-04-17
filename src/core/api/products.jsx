@@ -189,3 +189,16 @@ export function productPreviewApi(formData) {
       });
   });
 }
+
+export function orderItemReview(formData) {
+  return new Promise((resolve, reject) => {
+    ApiService.post(`/order-item-reviews`, formData, null, null, false)
+      .then(response => {
+        resolve(response);
+      })
+      .catch(e => {
+        console.log('Console Log: : error states', e);
+        reject(e);
+      });
+  });
+}
