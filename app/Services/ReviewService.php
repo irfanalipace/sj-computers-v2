@@ -162,4 +162,20 @@ class ReviewService
         return $this->repository->showReviewReport($id);
     }
 
+    public function createOrderItemReviews($request)
+    {       
+        $review = [];
+        foreach ($request->review_items as $value) {
+            # code...
+           $review []= ProductReview::create([
+                'guest_id' => $request->guest_id  ?? null,
+                'user_id' => $request->user_id ?? null,
+                'product_id' => $value['product_id'],
+                'body' => $value['body'],
+                'rating' => $value['rating'],                
+            ]);
+        }
+       return $review;
+    }
+
 }
