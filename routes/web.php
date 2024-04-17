@@ -10,7 +10,9 @@ use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\HoldRelease\HoldReleaseController;
 use App\Http\Controllers\SiteMapController;
 use App\Http\Controllers\Api\PayPalController;
+use App\Http\Controllers\Api\ProductController as ApiProductController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +32,16 @@ Route::get('hold-release-product',[HoldReleaseController::class,'updateRecord'])
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::post('send-newsletter',[ApiProductController::class,'sendNewsletter'])->name('get-product');
 });
 Route::get('export-inventory',[InventoryController::class,'downloadInventoryFile'])->name('export-inventory');
 
 Route::get('gmarketingfeed',[MarketingController::class,'gmarketingfeed'])->name('gmarketingfeed');
 
 Route::get('order-show-detail/{id}',[OrderController::class,'showOrderDetail'])->name('order-show-detail');
+
+Route::get('get-product',[ApiProductController::class,'getProduct'])->name('get-product');
 
 //Route::get('sitemap/index.xml', [SiteMapController::class, 'generateSiteMap']);
 //Route::get('sitemap_pages.xml', [SiteMapController::class, 'pageSiteMap']);
