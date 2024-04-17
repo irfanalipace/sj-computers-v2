@@ -188,4 +188,14 @@ class ReviewController extends BaseController
         }
     }
 
+    public function orderItemReview(Request $request)
+    {
+        try {
+           
+           $reviews = $this->service->createOrderItemReviews($request);
+           return $this->sendResponse($reviews, 'Successfully created order items reviews.');
+        } catch (Exception $e) {
+            return $this->sendError('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
 }

@@ -35,7 +35,8 @@ class Kernel extends ConsoleKernel
             'generate:site-map' => 'everyThirtyMinutes',
             'product-statistics' => 'weekly',
             'order-tracking-history' => 'everyThirtyMinutes',
-            'log-clear' => 'daily'
+            'log-clear' => 'daily',
+            'reminder-cart' => 'everySixHours'
         ];
 
         foreach ($commands as $command => $scheduleMethod) {
