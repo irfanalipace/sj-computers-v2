@@ -19,11 +19,10 @@ class PaymentFailedJob implements ShouldQueue
      *
      * @return void
      */
-    private $order, $errorMessage;
-    public function __construct($order, $errorMessage)
+    private $order;
+    public function __construct($order)
     {
         $this->order = $order;
-        $this->errorMessage = $errorMessage;
     }
 
     /**
@@ -33,22 +32,14 @@ class PaymentFailedJob implements ShouldQueue
      */
     public function handle()
     {
-        $order['order'] = $this->order['order']->toArray();
-        $order['ErrorMessage'] = $this->errorMessage;
+        $name = $this->order->name;
 
         //Email to customer
-        $email = $order['order']['user']['email'];
-//        $ccEmail = 'orders@sjcomputers.us';
+        $email = $this->order->email;
 
-        Mail::send('emails.payment.payment-failed', ['data' => $order], function ($m) use ($email) {
+        Mail::send('emails.payment.payment-failed', ['name' => $name], function ($m) use ($email) {
             $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-            $m->to($email)->subject('Payment Canceled.');
+            $m->to($email)->subject('Payment Failed.');
         });
-
-//        Mail::send('emails.order.order-send-to-admin', ['data' => $order], function ($m) use ($email, $ccEmail) {
-//            $m->from(config('mail.from.address'), config('app.name', 'APP Name'));
-//            $m->to(config('mail.from.address'))->subject('Order Placed.');
-//            $m->cc($ccEmail);
-//        });
     }
 }
