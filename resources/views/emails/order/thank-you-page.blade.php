@@ -592,7 +592,7 @@
                                                                                                                         <td style="width: 70%">
                                                                                                                             <div
                                                                                                                                 style="display: inline-block; width: 80%; text-align: center;font-size:12px; margin: 2rem 0px; background-color: #318243; border-radius: 8px;  color: #fff; padding: 10px 30px;">
-                                                                                                                                <a href="{{ config('app.react_app_url') }}/{{ $data['order']['id'] }}"
+                                                                                                                                <a href="{{ config('app.react_app_url') }}/orders-review?order_id={{ $data['order']['id'] }}"
                                                                                                                                    style="color: #fff; text-decoration: none; cursor: pointer">LEAVE
                                                                                                                                     A
                                                                                                                                     REVIEW</a>
