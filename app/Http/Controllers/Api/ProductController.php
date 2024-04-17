@@ -18,6 +18,7 @@ use App\Models\ProductInfo;
 use App\Models\ProductMedia;
 use App\Models\ProductReview;
 use App\Models\ProductStatistic;
+use App\Models\Subscriber;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -1094,5 +1095,19 @@ class ProductController extends BaseController
 
         return Product::whereIn('asin', $accessories);
 
+    }
+
+    public function getProduct()
+    {
+        return view('vendor.voyager.products.get-product');
+    }
+
+    public function sendNewsletter(Request $request)
+    {      
+        $ids = $request->ids;    
+        $product = Product::whereIn('id',$ids)->get();
+        $subscription = Subscriber::where('is_subscribe',1)->get();
+
+        return response()->json([true]);
     }
 }
