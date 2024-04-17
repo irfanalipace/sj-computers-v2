@@ -1,13 +1,42 @@
 import { Grid } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import letterImage from '@images/advertisement/Layer_1.png';
 import './Subscribe.css';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { subscribeEmail } from '../../../core/api/subscribeEmail';
+import { toast } from 'react-toastify';
+
 const Subscribe = () => {
   const user = useSelector(state => state?.auth?.isAuthenticated);
   const navigate = useNavigate();
+  const [emailInput, setEmailInput] = useState('');
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleSubscribe = () => {
+    subscribeEmail(emailInput)
+      .then(response => {
+        toast.success(response?.message);
+        setEmailInput('');
+        setIsChecked(false);
+        // Optionally, you can navigate the user or show a success message here
+      })
+      .catch(error => {
+        console.error('Error subscribing email:', error);
+        toast.error(error?.data?.code || error?.data?.message);
+        // Handle error, show error message, etc.
+      });
+  };
+
+  const handleInputChange = e => {
+    setEmailInput(e.target.value);
+  };
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <div style={{ backgroundColor: '#fff' }}>
       <Grid
@@ -28,9 +57,19 @@ const Subscribe = () => {
             style={{ padding: '5px 10px' }}
             placeholder='Enter your email address here'
             className='input-subscribe'
+            value={emailInput}
+            onChange={handleInputChange}
           />
           <br />
-          <button className='button-subscribe'>Subscribe</button>
+          <button
+            className='button-subscribe'
+            style={{
+              backgroundColor: !isChecked || emailInput === '' ? 'gray' : '',
+            }}
+            disabled={emailInput === '' || !isChecked} // Disable if emailInput is empty or checkbox not checked
+            onClick={handleSubscribe}>
+            Subscribe
+          </button>
           <br />
           <Grid container mt={2}>
             <Grid>
@@ -38,6 +77,8 @@ const Subscribe = () => {
                 type='checkbox'
                 className='protectionPlanCheckbox '
                 id='protectionPlanCheckbox'
+                checked={isChecked}
+                onChange={handleCheckboxChange}
               />
             </Grid>
             <Grid>
