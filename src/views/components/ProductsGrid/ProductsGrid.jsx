@@ -81,7 +81,12 @@ export default function ProductsGrid({
             )}
           </div>
         )}
-        <OverlayLoader isLoading={isLoading} />
+        <div className='loader-functions-screen'>
+          <OverlayLoader
+            isLoading={isLoading}
+           
+          />
+        </div>
       </div>
     </div>
   );
