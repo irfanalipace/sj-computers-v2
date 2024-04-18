@@ -96,7 +96,7 @@ const ProductCardLayout2 = ({
   };
 
   const ProductDetails = () => (
-    <div>
+    <div >
       <div
         className='product-details pe-2 ps-0 ps-lg-1'
         style={{ padding: '0px 0px', marginLeft: '5px' }}>
@@ -117,7 +117,8 @@ const ProductCardLayout2 = ({
             <div
               className='product-name product-cart-name-mobile-screen'
               style={{
-                margin: productView == 'list' ? '2px 0px' : '', maxWidth:'220px'
+                margin: productView == 'list' ? '2px 0px' : '',
+                maxWidth: '220px',
               }}>
               {product.name}
             </div>
@@ -400,7 +401,8 @@ const ProductCardLayout2 = ({
         <div
           className={` ${
             inGrid ? 'product-image-grid-layout2' : ''
-          } product-image-layout2`}>
+          } product-image-layout2`}
+          >
           {/* {inGrid && (
                     <div className="product-badge">
                         <div className="badge-text">Best Seller</div>
@@ -412,6 +414,7 @@ const ProductCardLayout2 = ({
               className='product-offer-label'
               style={{
                 backgroundColor: '#1860A3',
+                
                 top: productView == 'list' ? '' : '',
               }}>
               New
@@ -430,6 +433,7 @@ const ProductCardLayout2 = ({
         </div>
       </Link>
       <div
+      style={{width:'100%'}}
         className={`${productView == 'list' ? 'product-detail-list-view' : ''}`}>
         <ProductDetails />
       </div>
