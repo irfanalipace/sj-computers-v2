@@ -110,11 +110,11 @@ export default function MobileThanku() {
           </div>
         </div>
         <div className='col-12 my-20'>
-          <p className='paragrap-text-notify-order'>
-            Your order with tracking No{' '}
+          <p className='track-order-paragraph-changes'>
+            Your order{' '}
             <span style={{ fontWeight: '900' }}>{orderDetails?.id}</span> has
-            been successfully confirmed. We’ll send you an email notification
-            once your order has shipped.
+            been successfully placed. We’ll send you an <br></br> email
+            notification once your order has shipped.
           </p>
         </div>
       </div>

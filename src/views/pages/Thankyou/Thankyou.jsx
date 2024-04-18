@@ -241,10 +241,10 @@ export default function ThankYou() {
             </div>
             <div className='col-12 my-20'>
               <p className='track-order-paragraph-changes'>
-                Your order with tracking No{' '}
+                Your order{' '}
                 <span style={{ fontWeight: '900' }}>{orderDetails?.id}</span>{' '}
-                has been successfully confirmed. We’ll send you an <br></br>{' '}
-                email notification once your order has shipped.
+                has been successfully placed. We’ll send you an <br></br> email
+                notification once your order has shipped.
               </p>
             </div>
           </div>
