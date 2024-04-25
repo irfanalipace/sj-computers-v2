@@ -6,7 +6,6 @@ import ProductCardLayout2 from '../ProductCard/ProductCardLayout2/ProductCardLay
 import ProductCardLayout3 from '../ProductCard/ProductCardLayout3/ProductCardLayout3';
 import OverlayLoader from '@common/LoaderComponent/OverlayLoader';
 import './ProductsGrid.css';
-
 import Button from '@common/Button/Button';
 import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
@@ -82,10 +81,7 @@ export default function ProductsGrid({
           </div>
         )}
         <div className='loader-functions-screen'>
-          <OverlayLoader
-            isLoading={isLoading}
-           
-          />
+          <OverlayLoader isLoading={isLoading} />
         </div>
       </div>
     </div>
